@@ -1,0 +1,25 @@
+
+
+.menuLink{
+    color:black;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: 0.1s;
+    padding: 2px;
+}
+
+
+
+.menuLink:hover button{
+    font-weight: bold;
+   text-decoration: underline;
+}
+
+.activeTab{
+    font-weight: bold;
+}
+
+.menuLinkMobile{
+    color: rgba(26, 24, 24, 0.85);
+    text-decoration: none;
+}
