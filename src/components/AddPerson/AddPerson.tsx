@@ -11,14 +11,17 @@ import Snackbar from "@mui/material/Snackbar";
 import {Alert} from "@mui/material";
 import {SeverityStatus} from "./interface/severityStatusInterface";
 import {updateForm} from "../../Utils/functions/updateForm";
+import {AddPersonType} from "./interface/formInterface";
 
 
 export const AddPerson = () => {
 
-
-    const initialState: PersonEntity = {
+    //@todo write option to have not defined position
+    const initialState: AddPersonType = {
         name: '',
-        surName: ''
+        surName: '',
+        position:'Assistant',
+        salary:0
     };
 
     const initialSeverityStatusState: SeverityStatus = {status: 'error', message: 'unexpected error, please try again later'}
@@ -86,7 +89,9 @@ export const AddPerson = () => {
                 <TextField id="outlined-basic" label="SurName" variant="outlined" value={form.surName}
                            sx={{padding: '8px'}}
                            onChange={e => updateForm('surName', e.target.value,form,setForm)}/>
-
+                <TextField id="outlined-basic" label="salary" variant="outlined" value={form.surName}
+                           sx={{padding: '8px'}}
+                           onChange={e => updateForm('s', e.target.value,form,setForm)}/>
                 <Button variant="contained" sx={{margin: '0 auto'}} onClick={sendForm}>Send</Button>
             </form>
 
