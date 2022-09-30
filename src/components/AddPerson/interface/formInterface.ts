@@ -1,3 +1,6 @@
-import { PersonUpdatedList } from "../../../../../backend/types/personPosition";
+import { PersonUpdatedList, PositionList } from "../../../../../backend/types/personPosition";
 
-export type AddPersonType = Omit<PersonUpdatedList,'personId'>;
+export interface AddPersonType extends Omit<PersonUpdatedList, 'position'|'personId' | 'salary'>{
+    position: PositionList | '';
+    salary: number | '';
+}
