@@ -17,6 +17,8 @@ import {SeverityStatus} from "./interface/severityStatusInterface";
 import {updateForm} from "../../Utils/functions/updateForm";
 import {AddPersonType} from "./interface/formInterface";
 import {positionList} from "../../data/positionList";
+import {response, validationFunction} from "./functions/validationFunction";
+import {FormInterface, SingleInput} from "./SingleInput";
 
 
 export const AddPerson = () => {
@@ -28,6 +30,14 @@ export const AddPerson = () => {
         salary: '',
     };
 
+
+    const updatedInitialState: FormInterface[] = [{label:'name',value:'',error:false,typeError:'',inputFieldType:'textField'},
+        {label:'surname',value:'',error:false,typeError:'',inputFieldType:'textField'},
+        {label:'salary',value:'',error:false,typeError:'',inputFieldType:'textField'},
+        {label:'position',value:'',error:false,typeError:'',inputFieldType:'select'},
+    ]
+
+
     const initialSeverityStatusState: SeverityStatus = {
         status: 'error',
         message: 'unexpected error, please try again later'
@@ -38,6 +48,9 @@ export const AddPerson = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
+
+    //@todo fast example, rewrite to handle it onSubmit or on change
+    const [name,setName] = useState<response>({error:false,typeError:''})
 
     const handleClick = () => {
         setOpen(true);
@@ -52,6 +65,12 @@ export const AddPerson = () => {
 
 
     const sendForm = async (e: FormEvent) => {
+
+        //@todo fast example
+        setName (validationFunction('name',form.name))
+
+
+
         e.preventDefault();
         setLoading(true);
         try {
@@ -92,45 +111,53 @@ export const AddPerson = () => {
                  // fullWidth={true}
             >
 
-                <TextField error   helperText="Name can't be empty." id="outlined-basic" label="Name" variant="outlined" value={form.name} sx={{padding: '8px'}}
-                           onChange={e => updateForm('name', e.target.value, form, setForm)}/>
+                {updatedInitialState.map(({label,value,error,typeError,inputFieldType})=>{
+                    return(
+                        <SingleInput key={label} label={label} value={value} typeError={typeError} inputFieldType={inputFieldType}  error={error} />
+                    )
+                })}
 
-                <TextField  error   helperText="Surname can't be empty." id="outlined-basic" label="Surname" variant="outlined" value={form.surName}
-                           sx={{padding: '8px'}}
-                           onChange={e => updateForm('surName', e.target.value, form, setForm)}/>
+                {/*<TextField error={name.error}   helperText={name.typeError} id="outlined-basic" label="Name" variant="outlined" value={form.name} sx={{padding: '8px'}}*/}
+                {/*           onChange={e => updateForm('name', e.target.value, form, setForm)}/>*/}
 
-                <TextField error   helperText="Please provide salary"  id="outlined-basic" label="Salary" variant="outlined" value={form.salary}
-                           sx={{padding: '8px'}}
-                           onChange={e => updateForm('salary', e.target.value, form, setForm)}/>
+                {/*<TextField  id="outlined-basic" label="Surname" variant="outlined" value={form.surName}*/}
+                {/*           sx={{padding: '8px'}}*/}
+                {/*           onChange={e => updateForm('surName', e.target.value, form, setForm)}/>*/}
 
-                <FormControl className={'styledForm'} fullWidth={true} error>
-                <FormLabel id="position-label"   >Position</FormLabel>
-                <Select
-                    error
-                    labelId="position-label"
-                    id="demo-simple-select"
-                    value={form.position}
-                    label="Position"
-                    onChange={e => updateForm('position', e.target.value, form, setForm)}
-                    renderValue={(selected) => {
-                        if (selected.length === 0) {
-                            return <em>Position</em>;
-                        }
+                {/*<TextField  id="outlined-basic" label="Salary" variant="outlined" value={form.salary}*/}
+                {/*           sx={{padding: '8px'}}*/}
+                {/*           onChange={e => updateForm('salary', e.target.value, form, setForm)}/>*/}
 
-                        return selected;
-                    }}
-                >
+                {/*<FormControl className={'styledForm'} fullWidth={true}*/}
+                {/*             // error*/}
+                {/*>*/}
+                {/*<FormLabel id="position-label"   >Position</FormLabel>*/}
+                {/*<Select*/}
+                {/*    // error*/}
+                {/*    labelId="position-label"*/}
+                {/*    id="demo-simple-select"*/}
+                {/*    value={form.position}*/}
+                {/*    label="Position"*/}
+                {/*    onChange={e => updateForm('position', e.target.value, form, setForm)}*/}
+                {/*    renderValue={(selected) => {*/}
+                {/*        if (selected.length === 0) {*/}
+                {/*            return <em>Position</em>;*/}
+                {/*        }*/}
 
-                    {positionList.map((position) => {
-                        return (
-                            <MenuItem key={position} value={position}>{position}</MenuItem>
-                        )
-                    })}
+                {/*        return selected;*/}
+                {/*    }}*/}
+                {/*>*/}
+
+                {/*    {positionList.map((position) => {*/}
+                {/*        return (*/}
+                {/*            <MenuItem key={position} value={position}>{position}</MenuItem>*/}
+                {/*        )*/}
+                {/*    })}*/}
 
 
-                </Select>
-                    <FormHelperText>Please choose the position</FormHelperText>
-                </FormControl>
+                {/*</Select>*/}
+                {/*    /!*<FormHelperText>Please choose the position</FormHelperText>*!/*/}
+                {/*</FormControl>*/}
                 <Button variant="contained" sx={{margin: '12px auto'}} onClick={sendForm}>Send</Button>
             </div>
 
