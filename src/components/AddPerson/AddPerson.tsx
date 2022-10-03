@@ -19,6 +19,7 @@ import {AddPersonType} from "./interface/formInterface";
 import {positionList} from "../../data/positionList";
 import {response, validationFunction} from "./functions/validationFunction";
 import {FormInterface, SingleInput} from "./SingleInput";
+import {useSelector} from "react-redux";
 
 
 export const AddPerson = () => {
@@ -31,11 +32,16 @@ export const AddPerson = () => {
     };
 
 
-    const updatedInitialState: FormInterface[] = [{label:'name',value:'',error:false,typeError:'',inputFieldType:'textField'},
-        {label:'surname',value:'',error:false,typeError:'',inputFieldType:'textField'},
-        {label:'salary',value:'',error:false,typeError:'',inputFieldType:'textField'},
-        {label:'position',value:'',error:false,typeError:'',inputFieldType:'select'},
+    const updatedInitialState: FormInterface[] = [{label:'name',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
+        {label:'surname',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
+        {label:'salary',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
+        {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
     ]
+
+
+    const reduxValue : FormInterface[] = useSelector((state:any) => state.addPersonForm);
+
+    console.log(reduxValue)
 
 
     const initialSeverityStatusState: SeverityStatus = {
@@ -43,14 +49,12 @@ export const AddPerson = () => {
         message: 'unexpected error, please try again later'
     }
 
-
     const [form, setForm] = useState<AddPersonType>(initialState);
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
 
-    //@todo fast example, rewrite to handle it onSubmit or on change
-    const [name,setName] = useState<response>({error:false,typeError:''})
+
 
     const handleClick = () => {
         setOpen(true);
@@ -66,8 +70,9 @@ export const AddPerson = () => {
 
     const sendForm = async (e: FormEvent) => {
 
-        //@todo fast example
-        setName (validationFunction('name',form.name))
+
+        //@todo validation function
+        // setName (validationFunction('name',form.name))
 
 
 
@@ -107,59 +112,16 @@ export const AddPerson = () => {
     return (<Container
             maxWidth="sm" sx={{padding: '20px'}}
         >
-            <div className={'styledForm'}
-                 // fullWidth={true}
-            >
+            <form className={'styledForm'}>
 
-                {updatedInitialState.map(({label,value,error,typeError,inputFieldType})=>{
+                {reduxValue.map(({label,value,error,errorMessage,inputFieldType})=>{
                     return(
-                        <SingleInput key={label} label={label} value={value} typeError={typeError} inputFieldType={inputFieldType}  error={error} />
+                        <SingleInput key={label} label={label} value={value} errorMessage={errorMessage} inputFieldType={inputFieldType} error={error} />
                     )
                 })}
 
-                {/*<TextField error={name.error}   helperText={name.typeError} id="outlined-basic" label="Name" variant="outlined" value={form.name} sx={{padding: '8px'}}*/}
-                {/*           onChange={e => updateForm('name', e.target.value, form, setForm)}/>*/}
-
-                {/*<TextField  id="outlined-basic" label="Surname" variant="outlined" value={form.surName}*/}
-                {/*           sx={{padding: '8px'}}*/}
-                {/*           onChange={e => updateForm('surName', e.target.value, form, setForm)}/>*/}
-
-                {/*<TextField  id="outlined-basic" label="Salary" variant="outlined" value={form.salary}*/}
-                {/*           sx={{padding: '8px'}}*/}
-                {/*           onChange={e => updateForm('salary', e.target.value, form, setForm)}/>*/}
-
-                {/*<FormControl className={'styledForm'} fullWidth={true}*/}
-                {/*             // error*/}
-                {/*>*/}
-                {/*<FormLabel id="position-label"   >Position</FormLabel>*/}
-                {/*<Select*/}
-                {/*    // error*/}
-                {/*    labelId="position-label"*/}
-                {/*    id="demo-simple-select"*/}
-                {/*    value={form.position}*/}
-                {/*    label="Position"*/}
-                {/*    onChange={e => updateForm('position', e.target.value, form, setForm)}*/}
-                {/*    renderValue={(selected) => {*/}
-                {/*        if (selected.length === 0) {*/}
-                {/*            return <em>Position</em>;*/}
-                {/*        }*/}
-
-                {/*        return selected;*/}
-                {/*    }}*/}
-                {/*>*/}
-
-                {/*    {positionList.map((position) => {*/}
-                {/*        return (*/}
-                {/*            <MenuItem key={position} value={position}>{position}</MenuItem>*/}
-                {/*        )*/}
-                {/*    })}*/}
-
-
-                {/*</Select>*/}
-                {/*    /!*<FormHelperText>Please choose the position</FormHelperText>*!/*/}
-                {/*</FormControl>*/}
                 <Button variant="contained" sx={{margin: '12px auto'}} onClick={sendForm}>Send</Button>
-            </div>
+            </form>
 
             <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
 

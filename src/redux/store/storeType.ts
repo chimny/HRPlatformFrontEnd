@@ -1,4 +1,5 @@
 import {PersonEntity} from "../../../../backend/types/person";
+import {FormInterface} from "../../components/AddPerson/SingleInput";
 
 
 export interface  UsersState {
@@ -8,5 +9,6 @@ export interface  UsersState {
 
 
 export interface StoreInterface {
-    personList: UsersState
+    personList: UsersState,
+    addPersonForm: FormInterface[]
 }

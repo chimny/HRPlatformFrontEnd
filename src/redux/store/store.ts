@@ -1,10 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
-import personReducer from '../slices/personSlice'
+import personReducer from '../slices/personSlice';
+import formReducer from '../slices/formSlice';
 import {StoreInterface} from "./storeType";
 
 export const store  = configureStore({
     reducer:{
-        personList: personReducer
+        personList: personReducer,
+        addPersonForm: formReducer
     }
 })
 
