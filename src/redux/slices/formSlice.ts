@@ -10,12 +10,13 @@ const initialState: FormInterface[] = [{label:'name',value:'',error:false,errorM
     {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
 ]
 
-
-
-
 export const submitPerson = createAsyncThunk(
     'personForm/submitPerson',
     async () => {
+
+        console.log('ok');
+
+
             const res = await fetch(`http://localhost:3001/addPerson`, {
                 method: 'POST',
                 headers: {
@@ -39,6 +40,9 @@ export const formSlice = createSlice({
             const {label,value} = payload;
             return state.map(el => el.label === label ? {...el,value:value}: {...el})
         }
+
+
+
     },
 })
 

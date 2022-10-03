@@ -1,47 +1,26 @@
 import {FormEvent, useState} from "react"
 import {InsertedPersonRes} from "../../../../backend/types/person";
-
+import {useDispatch} from "react-redux";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import {FormControl, FormLabel,FormHelperText} from '@mui/material';
-
 import './styledForm.css'
 import {Spinner} from "../Spinner/Spinner";
 import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import {Alert} from "@mui/material";
 import {SeverityStatus} from "./interface/severityStatusInterface";
-import {updateForm} from "../../Utils/functions/updateForm";
 import {AddPersonType} from "./interface/formInterface";
-import {positionList} from "../../data/positionList";
-import {response, validationFunction} from "./functions/validationFunction";
 import {FormInterface, SingleInput} from "./SingleInput";
 import {useSelector} from "react-redux";
+import {submitPerson} from "../../redux/slices/formSlice";
+import {AppDispatch} from "../../redux/store/store";
 
 
 export const AddPerson = () => {
 
-    const initialState: AddPersonType = {
-        name: '',
-        surName: '',
-        position: '',
-        salary: '',
-    };
-
-
-    const updatedInitialState: FormInterface[] = [{label:'name',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
-        {label:'surname',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
-        {label:'salary',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
-        {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
-    ]
 
 
     const reduxValue : FormInterface[] = useSelector((state:any) => state.addPersonForm);
-
-    console.log(reduxValue)
 
 
     const initialSeverityStatusState: SeverityStatus = {
@@ -49,12 +28,13 @@ export const AddPerson = () => {
         message: 'unexpected error, please try again later'
     }
 
-    const [form, setForm] = useState<AddPersonType>(initialState);
+    // const [form, setForm] = useState<AddPersonType>(initialState);
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
 
 
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleClick = () => {
         setOpen(true);
@@ -74,6 +54,15 @@ export const AddPerson = () => {
         //@todo validation function
         // setName (validationFunction('name',form.name))
 
+        const receivedData = reduxValue
+
+        const newData :any = {};
+
+        for (const input of receivedData){
+         newData[`${input.label}`] = input.value
+        }
+
+
 
 
         e.preventDefault();
@@ -84,7 +73,7 @@ export const AddPerson = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(form),
+                body: JSON.stringify(newData),
             });
             const responseMes: InsertedPersonRes = await res.json();
 
@@ -97,7 +86,7 @@ export const AddPerson = () => {
         } finally {
             setLoading(false);
             handleClick();
-            setForm(initialState);
+            // setForm(initialState);
         }
     };
 
@@ -120,7 +109,10 @@ export const AddPerson = () => {
                     )
                 })}
 
-                <Button variant="contained" sx={{margin: '12px auto'}} onClick={sendForm}>Send</Button>
+                <Button variant="contained" sx={{margin: '12px auto'}}
+                        onClick={sendForm}
+
+                >Send</Button>
             </form>
 
             <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
