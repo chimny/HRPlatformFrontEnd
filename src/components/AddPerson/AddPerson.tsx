@@ -9,18 +9,16 @@ import * as React from "react";
 import Snackbar from "@mui/material/Snackbar";
 import {Alert} from "@mui/material";
 import {SeverityStatus} from "./interface/severityStatusInterface";
-import {AddPersonType} from "./interface/formInterface";
 import {FormInterface, SingleInput} from "./SingleInput";
 import {useSelector} from "react-redux";
-import {submitPerson} from "../../redux/slices/formSlice";
+import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
 
 
 export const AddPerson = () => {
 
 
-
-    const reduxValue : FormInterface[] = useSelector((state:any) => state.addPersonForm);
+    const reduxValue: FormInterface[] = useSelector((state: any) => state.addPersonForm);
 
 
     const initialSeverityStatusState: SeverityStatus = {
@@ -51,15 +49,15 @@ export const AddPerson = () => {
     const sendForm = async (e: FormEvent) => {
 
 
-        //@todo validation function
+        //@todo rewrite validation function
         // setName (validationFunction('name',form.name))
 
         const receivedData = reduxValue
 
-        const newData :any = {};
+        const newData: any = {};
 
-        for (const input of receivedData){
-         newData[`${input.label}`] = input.value
+        for (const input of receivedData) {
+            newData[`${input.label}`] = input.value
         }
 
 
@@ -87,7 +85,9 @@ export const AddPerson = () => {
             setLoading(false);
             handleClick();
             // setForm(initialState);
+            dispatch(restartForm());
         }
+
     };
 
 
@@ -103,9 +103,10 @@ export const AddPerson = () => {
         >
             <form className={'styledForm'}>
 
-                {reduxValue.map(({label,value,error,errorMessage,inputFieldType})=>{
-                    return(
-                        <SingleInput key={label} label={label} value={value} errorMessage={errorMessage} inputFieldType={inputFieldType} error={error} />
+                {reduxValue.map(({label, value, error, errorMessage, inputFieldType}) => {
+                    return (
+                        <SingleInput key={label} label={label} value={value} errorMessage={errorMessage}
+                                     inputFieldType={inputFieldType} error={error}/>
                     )
                 })}
 
