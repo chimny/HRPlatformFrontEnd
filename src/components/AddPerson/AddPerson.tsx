@@ -13,9 +13,11 @@ import {FormInterface, SingleInput} from "./SingleInput";
 import {useSelector} from "react-redux";
 import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
-
+import {validationFunction} from "./functions/validationFunction";
+import {availableLabels} from './functions/validationFunction'
 
 export const AddPerson = () => {
+
 
 
     const reduxValue: FormInterface[] = useSelector((state: any) => state.addPersonForm);
@@ -54,9 +56,12 @@ export const AddPerson = () => {
 
         const receivedData = reduxValue
 
+        // const availableLabels:availableLabels[] = ['position','name','surName','salary']
+
         const newData: any = {};
 
         for (const input of receivedData) {
+          validationFunction(input.label, input.value,dispatch)
             newData[`${input.label}`] = input.value
         }
 
@@ -77,7 +82,7 @@ export const AddPerson = () => {
 
             setSeverityStatus({status: responseMes.status, message: responseMes.message})
 
-
+            dispatch(restartForm());
         } catch (e) {
             console.error(`unexpected error occured ${e}`);
             setSeverityStatus(initialSeverityStatusState)
@@ -85,7 +90,7 @@ export const AddPerson = () => {
             setLoading(false);
             handleClick();
             // setForm(initialState);
-            dispatch(restartForm());
+
         }
 
     };

@@ -36,9 +36,14 @@ export const formSlice = createSlice({
     initialState,
     reducers: {
 
-        updateForm: (state, {payload}) => {
+        updateForm: (state:FormInterface[], {payload}) => {
             const {label,value} = payload;
             return state.map(el => el.label === label ? {...el,value:value}: {...el})
+        },
+
+        setError: (state,{payload})=>{
+            const {label, errorMsg} = payload;
+            return state.map( el => el.label === label ? {...el,error:true,errorMessage:errorMsg}: {...el})
         },
 
         restartForm: ()=> initialState,
@@ -48,7 +53,7 @@ export const formSlice = createSlice({
     },
 })
 
-export const {updateForm,restartForm} = formSlice.actions;
+export const {updateForm,restartForm,setError} = formSlice.actions;
 
 export default formSlice.reducer
 

@@ -38,11 +38,11 @@ export const SingleInput = (props: FormInterface) => {
 
         return (
             <FormControl className={'styledForm'} fullWidth={true}
-                // error
+                error={error}
             >
                 <FormLabel id="position-label">position</FormLabel>
                 <Select
-                    // error
+                    error={error}
                     labelId="position-label"
                     id="demo-simple-select"
                     value={value}
