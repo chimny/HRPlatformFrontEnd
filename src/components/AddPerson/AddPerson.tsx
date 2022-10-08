@@ -14,26 +14,27 @@ import {useSelector} from "react-redux";
 import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
 import {validationFunction} from "./functions/validationFunction";
-import { NewPersonPosition } from "../../../../backend/types/newPesonPosition";
-import {availableLabelsArr} from "./types/availableLabels";
+import {availableLabels} from './functions/validationFunction'
 
 export const AddPerson = () => {
 
 
-    const reduxFormData: FormInterface[] = useSelector((state: any) => state.addPersonForm);
-    const dispatch = useDispatch<AppDispatch>();
+
+    const reduxValue: FormInterface[] = useSelector((state: any) => state.addPersonForm);
+
 
     const initialSeverityStatusState: SeverityStatus = {
         status: 'error',
         message: 'unexpected error, please try again later'
     }
 
+    // const [form, setForm] = useState<AddPersonType>(initialState);
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
 
 
-
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleClick = () => {
         setOpen(true);
@@ -50,19 +51,14 @@ export const AddPerson = () => {
     const sendForm = async (e: FormEvent) => {
         e.preventDefault();
 
-        //@todo work with types - use typeof
-        const newData: NewPersonPosition | {} = {};
+        const receivedData = reduxValue
 
 
-        /*
-       loop below provides FE validation, converts redux state into new object set to send
-        */
-        for (const input of reduxFormData) {
+        const newData: any = {};
+
+        for (const input of receivedData) {
           validationFunction(input.label, input.value,dispatch)
-            // if(typeof input.label === typeof availableLabels)
-            if(availableLabelsArr.includes(input.label)){
-                newData[`${input.label}`] = input.value
-            }
+            newData[`${input.label}`] = input.value
         }
 
 
@@ -110,7 +106,7 @@ export const AddPerson = () => {
         >
             <form className={'styledForm'}>
 
-                {reduxFormData.map(({label, value, error, errorMessage, inputFieldType}) => {
+                {reduxValue.map(({label, value, error, errorMessage, inputFieldType}) => {
                     return (
                         <SingleInput key={label} label={label} value={value} errorMessage={errorMessage}
                                      inputFieldType={inputFieldType} error={error}/>

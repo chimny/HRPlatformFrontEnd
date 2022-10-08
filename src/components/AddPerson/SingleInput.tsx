@@ -6,7 +6,8 @@ import {positionList} from "../../data/positionList";
 import MenuItem from "@mui/material/MenuItem";
 import {useDispatch} from "react-redux";
 import {updateForm} from "../../redux/slices/formSlice";
-import {availableLabels} from "./functions/validationFunction";
+import { availableLabels } from "./types/availableLabels";
+
 
 export interface FormInterface {
     label: availableLabels;

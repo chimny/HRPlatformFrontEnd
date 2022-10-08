@@ -5,7 +5,7 @@ import { InsertedPersonRes } from "../../../../backend/types/person";
 
 
 const initialState: FormInterface[] = [{label:'name',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
-    {label:'surname',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
+    {label:'surName',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
     {label:'salary',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
     {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
 ]

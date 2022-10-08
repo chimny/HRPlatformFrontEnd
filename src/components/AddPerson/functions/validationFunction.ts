@@ -1,8 +1,7 @@
 import { setError,clearError } from "../../../redux/slices/formSlice";
 import {AppDispatch} from "../../../redux/store/store";
 
-
-
+export type availableLabels = 'name' | 'surName' | 'position' | 'salary'
 
 export type response = {
     error: boolean,
@@ -64,7 +63,7 @@ export const validationFunction = (labels:string, value: string | number, dispat
             return safeValue;
 
 
-        case 'surname':
+        case 'surName':
 
             if(!regName.test(String(value))){
                 const errorMsg = 'please provide proper surname!'
