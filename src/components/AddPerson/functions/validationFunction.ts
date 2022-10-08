@@ -1,7 +1,8 @@
 import { setError,clearError } from "../../../redux/slices/formSlice";
 import {AppDispatch} from "../../../redux/store/store";
 
-export type availableLabels = 'name' | 'surName' | 'position' | 'salary'
+
+
 
 export type response = {
     error: boolean,

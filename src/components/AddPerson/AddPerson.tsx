@@ -13,15 +13,15 @@ import {FormInterface, SingleInput} from "./SingleInput";
 import {useSelector} from "react-redux";
 import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
-import {availableLabels, validationFunction} from "./functions/validationFunction";
+import {validationFunction} from "./functions/validationFunction";
 import { NewPersonPosition } from "../../../../backend/types/newPesonPosition";
+import {availableLabelsArr} from "./types/availableLabels";
 
 export const AddPerson = () => {
 
 
-
     const reduxFormData: FormInterface[] = useSelector((state: any) => state.addPersonForm);
-
+    const dispatch = useDispatch<AppDispatch>();
 
     const initialSeverityStatusState: SeverityStatus = {
         status: 'error',
@@ -33,7 +33,7 @@ export const AddPerson = () => {
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
 
 
-    const dispatch = useDispatch<AppDispatch>();
+
 
     const handleClick = () => {
         setOpen(true);
@@ -52,11 +52,17 @@ export const AddPerson = () => {
 
         //@todo work with types - use typeof
         const newData: NewPersonPosition | {} = {};
-console.log(typeof  availableLabels)
+
+
+        /*
+       loop below provides FE validation, converts redux state into new object set to send
+        */
         for (const input of reduxFormData) {
           validationFunction(input.label, input.value,dispatch)
             // if(typeof input.label === typeof availableLabels)
-            newData[`${input.label}`] = input.value
+            if(availableLabelsArr.includes(input.label)){
+                newData[`${input.label}`] = input.value
+            }
         }
 
 

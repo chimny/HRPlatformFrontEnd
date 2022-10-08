@@ -6,9 +6,10 @@ import {positionList} from "../../data/positionList";
 import MenuItem from "@mui/material/MenuItem";
 import {useDispatch} from "react-redux";
 import {updateForm} from "../../redux/slices/formSlice";
+import {availableLabels} from "./functions/validationFunction";
 
 export interface FormInterface {
-    label: string;
+    label: availableLabels;
     value: string | '' | number;
     error: boolean;
     errorMessage: string;
