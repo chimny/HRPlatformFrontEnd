@@ -19,7 +19,6 @@ export interface FormInterface {
 export const SingleInput = (props: FormInterface) => {
 
 
-
     const {error, errorMessage, value, label, inputFieldType} = props;
 
     const dispatch = useDispatch();
@@ -27,9 +26,10 @@ export const SingleInput = (props: FormInterface) => {
 
     if (inputFieldType === 'textField') {
         return (
-            <TextField error={error} helperText={errorMessage} id="outlined-basic" label={label} variant="outlined"
+            <TextField inputProps={{inputMode: 'numeric', pattern: '[0-9]*'}} error={error} helperText={errorMessage}
+                       id="outlined-basic" label={label} variant="outlined"
                        value={value} sx={{padding: '8px'}}
-                       onChange={e => dispatch(updateForm({label,value: e.target.value}))}
+                       onChange={e => dispatch(updateForm({label, value: e.target.value}))}
             />
         )
     }
@@ -38,7 +38,7 @@ export const SingleInput = (props: FormInterface) => {
 
         return (
             <FormControl className={'styledForm'} fullWidth={true}
-                error={error}
+                         error={error}
             >
                 <FormLabel id="position-label">position</FormLabel>
                 <Select
@@ -47,7 +47,7 @@ export const SingleInput = (props: FormInterface) => {
                     id="demo-simple-select"
                     value={value}
                     label="position"
-                    onChange={e => dispatch(updateForm({label,value: e.target.value}))}
+                    onChange={e => dispatch(updateForm({label, value: e.target.value}))}
                     renderValue={(selected) => {
                         if (typeof selected === "string" && selected.length === 0) {
                             return <em>Position</em>;

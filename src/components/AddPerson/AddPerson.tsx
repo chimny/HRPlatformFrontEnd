@@ -13,14 +13,14 @@ import {FormInterface, SingleInput} from "./SingleInput";
 import {useSelector} from "react-redux";
 import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
-import {validationFunction} from "./functions/validationFunction";
-import {availableLabels} from './functions/validationFunction'
+import {availableLabels, validationFunction} from "./functions/validationFunction";
+import { NewPersonPosition } from "../../../../backend/types/newPesonPosition";
 
 export const AddPerson = () => {
 
 
 
-    const reduxValue: FormInterface[] = useSelector((state: any) => state.addPersonForm);
+    const reduxFormData: FormInterface[] = useSelector((state: any) => state.addPersonForm);
 
 
     const initialSeverityStatusState: SeverityStatus = {
@@ -28,7 +28,6 @@ export const AddPerson = () => {
         message: 'unexpected error, please try again later'
     }
 
-    // const [form, setForm] = useState<AddPersonType>(initialState);
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
@@ -49,26 +48,23 @@ export const AddPerson = () => {
 
 
     const sendForm = async (e: FormEvent) => {
+        e.preventDefault();
 
-
-        //@todo rewrite validation function
-        // setName (validationFunction('name',form.name))
-
-        const receivedData = reduxValue
-
-        // const availableLabels:availableLabels[] = ['position','name','surName','salary']
-
-        const newData: any = {};
-
-        for (const input of receivedData) {
+        //@todo work with types - use typeof
+        const newData: NewPersonPosition | {} = {};
+console.log(typeof  availableLabels)
+        for (const input of reduxFormData) {
           validationFunction(input.label, input.value,dispatch)
+            // if(typeof input.label === typeof availableLabels)
             newData[`${input.label}`] = input.value
         }
 
 
 
 
-        e.preventDefault();
+
+
+
         setLoading(true);
         try {
             const res = await fetch(`http://localhost:3001/addPerson`, {
@@ -108,7 +104,7 @@ export const AddPerson = () => {
         >
             <form className={'styledForm'}>
 
-                {reduxValue.map(({label, value, error, errorMessage, inputFieldType}) => {
+                {reduxFormData.map(({label, value, error, errorMessage, inputFieldType}) => {
                     return (
                         <SingleInput key={label} label={label} value={value} errorMessage={errorMessage}
                                      inputFieldType={inputFieldType} error={error}/>

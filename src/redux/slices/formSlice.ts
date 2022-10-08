@@ -46,6 +46,11 @@ export const formSlice = createSlice({
             return state.map( el => el.label === label ? {...el,error:true,errorMessage:errorMsg}: {...el})
         },
 
+        clearError: (state,{payload})=>{
+            const {label} = payload;
+            return state.map( el => el.label === label ? {...el,error:false,errorMessage:''}: {...el})
+        },
+
         restartForm: ()=> initialState,
 
 
@@ -53,7 +58,7 @@ export const formSlice = createSlice({
     },
 })
 
-export const {updateForm,restartForm,setError} = formSlice.actions;
+export const {updateForm,restartForm,setError,clearError} = formSlice.actions;
 
 export default formSlice.reducer
 
