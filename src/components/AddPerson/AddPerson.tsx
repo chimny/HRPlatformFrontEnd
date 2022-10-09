@@ -15,23 +15,27 @@ import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
 import {validationFunction} from "./functions/validationFunction";
 import {availableLabels} from './functions/validationFunction'
+import {StoreInterface} from "../../redux/store/storeType";
 
 export const AddPerson = () => {
 
 
+    const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
 
-    const reduxValue: FormInterface[] = useSelector((state: any) => state.addPersonForm);
 
-
-    const initialSeverityStatusState: SeverityStatus = {
+    const unexpectedSeverityStatusState: SeverityStatus = {
         status: 'error',
         message: 'unexpected error, please try again later'
     }
 
-    // const [form, setForm] = useState<AddPersonType>(initialState);
+    const frontEndErrValidationSeverityStatusState: SeverityStatus = {
+        status: 'error',
+        message: 'please correct highlighted fields'
+    }
+
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
-    const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(initialSeverityStatusState)
+    const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(frontEndErrValidationSeverityStatusState)
 
 
     const dispatch = useDispatch<AppDispatch>();
@@ -48,23 +52,18 @@ export const AddPerson = () => {
     };
 
 
+    //@todo review post form - still error occurs from the backend
     const sendForm = async (e: FormEvent) => {
         e.preventDefault();
 
         const receivedData = reduxValue
-
-
         const newData: any = {};
 
         for (const input of receivedData) {
-          validationFunction(input.label, input.value,dispatch)
+            validationFunction(input.label, input.value, dispatch)
             newData[`${input.label}`] = input.value
         }
-
-
-
-
-
+        console.log(newData);
 
 
         setLoading(true);
@@ -76,14 +75,27 @@ export const AddPerson = () => {
                 },
                 body: JSON.stringify(newData),
             });
+
+
+            //checks if any input has error
+            if (reduxValue.find(el => el.error )) {
+                setSeverityStatus(frontEndErrValidationSeverityStatusState);
+                console.log('still here!')
+                return
+            }
+
+
             const responseMes: InsertedPersonRes = await res.json();
 
-            setSeverityStatus({status: responseMes.status, message: responseMes.message})
+            if (responseMes.status === 'success') {
+                setSeverityStatus({status: responseMes.status, message: responseMes.message})
+                dispatch(restartForm());
+            }
 
-            dispatch(restartForm());
+
         } catch (e) {
             console.error(`unexpected error occured ${e}`);
-            setSeverityStatus(initialSeverityStatusState)
+            setSeverityStatus(unexpectedSeverityStatusState)
         } finally {
             setLoading(false);
             handleClick();
