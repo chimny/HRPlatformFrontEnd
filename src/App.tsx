@@ -25,7 +25,7 @@ function App() {
               {/*@todo test route below*/}
               <Route path='/' element={<BasicTable/>}/>
               <Route path='/persons' element={<PersonList/>}/>
-              <Route path='/persons/addPerson' element={<AddPerson/>}/>
+              <Route path='/addPerson' element={<AddPerson/>}/>
               <Route path='/position-list' element={<PositionList/>}/>
               <Route path='/salary-data' element={<SalaryData/>}/>
           </Routes>

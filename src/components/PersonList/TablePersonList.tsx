@@ -36,7 +36,7 @@ const rows = [
 export default function BasicTable() {
 
 
-    const listedPersons = useSelector((state: StoreInterface) => state.personList.receivedData.peopleList)
+    const listedPersons = useSelector((state: StoreInterface) => state.personList.receivedData.personPositionData)
     const dispatch = useDispatch<AppDispatch>();
 
     const resStatus = useSelector((state: StoreInterface) => state.personList.status)
@@ -76,14 +76,14 @@ export default function BasicTable() {
                 <TableBody>
                     {listedPersons.map((person) => (
                         <TableRow
-                            key={person.id}
+                            key={person.personId}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}
                         >
                             <TableCell component="th" scope="row">
                                 {person.name}
                             </TableCell>
                             <TableCell align="right">{person.surName}</TableCell>
-                                <TableCell align="right"><PersonActions person={person} onDelete={()=>deleteHandler(person.id as string)} /></TableCell>
+                                <TableCell align="right"><PersonActions person={person} onDelete={()=>deleteHandler(person.personId as string)} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

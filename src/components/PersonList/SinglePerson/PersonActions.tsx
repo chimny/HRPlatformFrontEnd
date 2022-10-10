@@ -1,10 +1,10 @@
 import {PersonEntity} from '../../../../../backend/types/person'
 import {useState} from "react";
 import {SinglePersonForm} from "./SinglePersonForm";
-import {Divider, Button} from '@mui/material';
+import { Button} from '@mui/material';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import {StyledLi} from "../Styles/StyledLi";
+
 
 interface Props {
     person: PersonEntity;

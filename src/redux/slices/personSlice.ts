@@ -5,7 +5,7 @@ import { UsersState} from "../store/storeType";
 export const getPeopleList = createAsyncThunk(
     'personList/getPeopleList',
     async () => {
-        const res = await fetch(`http://localhost:3001/persons`);
+        const res = await fetch(`http://localhost:3001/personList`);
         return await res.json()
     }
 )
@@ -19,7 +19,7 @@ export const removePerson = createAsyncThunk(
 
 
 const initialState: UsersState = {
-    receivedData: {peopleList: []},
+    receivedData: {personPositionData: []},
     status: null
 }
 
@@ -28,16 +28,16 @@ export const personSlice = createSlice({
     name: 'personList',
     initialState,
     reducers: {
-        removePersonFromState: (state, {payload}) => {
-            const filteredPersonList = state.receivedData.peopleList.filter(el => el.id !== payload);
+        removePersonFromState: (state:UsersState, {payload}) => {
+            const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== payload);
             return {...state, receivedData: {peopleList: filteredPersonList}}
         },
 
 
-        updatePerson: (state, {payload}) => {
+        updatePerson: (state:UsersState, {payload}) => {
             const {id, name, surName} = payload;
 
-            state.receivedData.peopleList = state.receivedData.peopleList.map(el => el.id !== id ? el : {
+            state.receivedData.personPositionData = state.receivedData.personPositionData.map(el => el.personId !== id ? el : {
                 ...el,
                 name,
                 surName

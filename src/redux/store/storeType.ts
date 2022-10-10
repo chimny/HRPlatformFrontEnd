@@ -1,9 +1,10 @@
-import {PersonEntity} from "../../../../backend/types/person";
+import { NewPersonPosition } from "../../../../backend/types/newPesonPosition";
+
 import {FormInterface} from "../../components/AddPerson/SingleInput";
 
 
 export interface  UsersState {
-        receivedData: { peopleList: PersonEntity[] } | { peopleList: [] },
+        receivedData: { personPositionData: NewPersonPosition[] } | { personPositionData: [] },
         status: null | 'pending' | 'succeeded' | 'failed'
 }
 

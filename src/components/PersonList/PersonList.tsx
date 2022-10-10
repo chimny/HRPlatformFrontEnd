@@ -11,36 +11,38 @@ import {Spinner} from "../Spinner/Spinner";
 
 export const PersonList = ()=>{
 
-    const listedPersons = useSelector((state : StoreInterface  ) => state.personList.receivedData.peopleList)
-    const dispatch =useDispatch<AppDispatch>();
-
-    const resStatus = useSelector((state : StoreInterface)=> state.personList.status)
-
-    const deleteHandler = useCallback((id:string)=>{
-        dispatch(removePerson(id));
-        dispatch(removePersonFromState(id))
-    },[dispatch])
-
-    useEffect(()=>{
-        dispatch(getPeopleList())
-    },[dispatch])
-
-
-    if (resStatus === "pending" ){
-        return <Spinner />
-    }
-
-     if (resStatus === "failed" ){
-        return (
-            <ErrorComponent/>
-        )
-    }
+    // const listedPersons = useSelector((state : StoreInterface  ) => state.personList.receivedData.peopleList);
+    // const dispatch =useDispatch<AppDispatch>();
+    //
+    // const resStatus = useSelector((state : StoreInterface)=> state.personList.status)
+    //
+    // const deleteHandler = useCallback((id:string)=>{
+    //     dispatch(removePerson(id));
+    //     dispatch(removePersonFromState(id))
+    // },[dispatch])
+    //
+    // useEffect(()=>{
+    //     dispatch(getPeopleList())
+    // },[dispatch])
+    //
+    //
+    // if (resStatus === "pending" ){
+    //     return <Spinner />
+    // }
+    //
+    //  if (resStatus === "failed" ){
+    //     return (
+    //         <ErrorComponent/>
+    //     )
+    // }
 
 
 
     return (
-       <ul>
-           {listedPersons.map( (el:PersonEntity) => <PersonActions person={el} key={el.id} onDelete={()=>deleteHandler(el.id as string)}/> ) }
-       </ul>
+       // <ul>
+       //     {listedPersons.map( (el:PersonEntity) => <PersonActions person={el} key={el.id} onDelete={()=>deleteHandler(el.id as string)}/> ) }
+       // </ul>
+
+        <h1>list suspended</h1>
     )
 }

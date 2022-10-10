@@ -31,7 +31,7 @@ const pagesUpdate: pageNavigation[] = [{
     },
     {
         name: 'Add person',
-        path: '/persons/addPerson'
+        path: '/addPerson'
     },
     {
         name: 'Position List',
