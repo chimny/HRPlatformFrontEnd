@@ -42,7 +42,10 @@ export default function BasicTable() {
     const resStatus = useSelector((state: StoreInterface) => state.personList.status)
 
     const deleteHandler = useCallback((id: string) => {
+        //requests to remove it from the server
         dispatch(removePerson(id));
+        //removes from redux state
+        //following function doesnt work
         dispatch(removePersonFromState(id))
     }, [dispatch])
 
@@ -74,7 +77,7 @@ export default function BasicTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {listedPersons.map((person) => (
+                    {listedPersons.map((person,index) => (
                         <TableRow
                             key={person.personId}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}

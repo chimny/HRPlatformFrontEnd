@@ -13,7 +13,7 @@ export const getPeopleList = createAsyncThunk(
 export const removePerson = createAsyncThunk(
     'personList/removePerson',
     async (id: string) => {
-        await fetch(`http://localhost:3001/persons/deletePerson/${id}`, {method: 'DELETE'});
+        await fetch(`http://localhost:3001/personList/deletePerson/${id}`, {method: 'DELETE'});
     }
 )
 
@@ -28,9 +28,14 @@ export const personSlice = createSlice({
     name: 'personList',
     initialState,
     reducers: {
-        removePersonFromState: (state:UsersState, {payload}) => {
-            const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== payload);
-            return {...state, receivedData: {peopleList: filteredPersonList}}
+        removePersonFromState: (state:UsersState, {payload}) : UsersState=> {
+            const {id} = payload;
+            const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== id);
+
+            //@todo work with proper typing
+            // console.log(state === filteredPersonList);
+
+            return {...state, receivedData: {personPositionData: filteredPersonList}}
         },
 
 
@@ -60,6 +65,9 @@ export const personSlice = createSlice({
 })
 
 export const {removePersonFromState, updatePerson} = personSlice.actions;
+
+// export const {updatePerson} = personSlice.actions;
+
 
 export default personSlice.reducer
 
