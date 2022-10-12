@@ -31,10 +31,8 @@ export const personSlice = createSlice({
         removePersonFromState: (state:UsersState, {payload}) : UsersState=> {
             const {id} = payload;
             const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== id);
-
-            //@todo work with proper typing
-            // console.log(state === filteredPersonList);
-
+            console.log(id);
+console.log(filteredPersonList)
             return {...state, receivedData: {personPositionData: filteredPersonList}}
         },
 

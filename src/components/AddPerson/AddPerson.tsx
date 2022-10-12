@@ -63,7 +63,6 @@ export const AddPerson = () => {
             validationFunction(input.label, input.value, dispatch)
             newData[`${input.label}`] = input.value
         }
-        console.log(newData);
 
 
         setLoading(true);
@@ -77,10 +76,9 @@ export const AddPerson = () => {
             });
 
 
-            //checks if any input has error
             if (reduxValue.find(el => el.error )) {
                 setSeverityStatus(frontEndErrValidationSeverityStatusState);
-                console.log('still here!')
+
                 return
             }
 

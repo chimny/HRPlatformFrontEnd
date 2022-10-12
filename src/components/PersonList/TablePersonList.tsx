@@ -15,23 +15,8 @@ import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {PersonActions} from "./SinglePerson/PersonActions";
 
-function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
-) {
-    return {name, calories, fat, carbs, protein};
-}
 
-const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+
 
 export default function BasicTable() {
 
@@ -41,13 +26,29 @@ export default function BasicTable() {
 
     const resStatus = useSelector((state: StoreInterface) => state.personList.status)
 
-    const deleteHandler = useCallback((id: string) => {
-        //requests to remove it from the server
+    // const deleteHandler =(id: string) => {
+    //     console.log(id);
+    //     //requests to remove it from the server
+    //     dispatch(removePerson(id));
+    //     //removes from redux state
+    //     dispatch(removePersonFromState(id))
+    // }
+
+
+    const deleteHandler = useCallback((id:string)=>{
         dispatch(removePerson(id));
-        //removes from redux state
-        //following function doesnt work
+        dispatch(removePersonFromState({id}))
+    },[dispatch])
+
+/*
+
+function with useCallback usage
+    const deleteHandler = useCallback((id: string) => {
+        dispatch(removePerson(id));
         dispatch(removePersonFromState(id))
     }, [dispatch])
+
+    */
 
     useEffect(() => {
         dispatch(getPeopleList())
@@ -77,7 +78,7 @@ export default function BasicTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {listedPersons.map((person,index) => (
+                    {listedPersons.map((person) => (
                         <TableRow
                             key={person.personId}
                             sx={{'&:last-child td, &:last-child th': {border: 0}}}

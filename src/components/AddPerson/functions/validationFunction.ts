@@ -63,7 +63,7 @@ export const validationFunction = (labels:string, value: string | number, dispat
             return safeValue;
 
 
-        case 'surName':
+        case 'surname':
 
             if(!regName.test(String(value))){
                 const errorMsg = 'please provide proper surname!'
