@@ -76,7 +76,7 @@ export const AddPerson = () => {
             });
 
 
-            if (reduxValue.find(el => el.error )) {
+            if (reduxValue.find(el => el.error)) {
                 setSeverityStatus(frontEndErrValidationSeverityStatusState);
 
                 return
