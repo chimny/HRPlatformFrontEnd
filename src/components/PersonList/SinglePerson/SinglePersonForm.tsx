@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import * as React from "react";
 import { NewPersonPosition } from "../../../../../backend/types/newPesonPosition";
+import { PositionList } from "../../../../../backend/types/personPosition";
 
 interface Props {
     person: NewPersonPosition;
@@ -36,18 +37,18 @@ export const SinglePersonForm = (props: Props) => {
     useEffect(disabledHandler, [form.surName, form.name, name, surName]);
 
 
-    const submitData = async (e: FormEvent, id: string, name: string, surName: string) => {
+    const submitData = async (e: FormEvent, personId: string, personName: string, surName: string,position:PositionList, salary:number) => {
         e.preventDefault();
 
         try {
-            await fetch(`http://localhost:3001/persons/updatePerson/${id}/${name}/${surName}`, {
+            await fetch(`http://localhost:3001/personList/updatePerson/${personId}/${personName}/${surName}/${position}/${String(salary)}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({id, name, surName}),
+                body: JSON.stringify({personId,personName,surName,position,salary}),
             });
-            dispatch(updatePerson({id, name, surName}));
+            dispatch(updatePerson({id: personId, name: personName, surName}));
             setDisabledButton(false);
             props.modify();
         } catch (e) {
@@ -91,7 +92,7 @@ export const SinglePersonForm = (props: Props) => {
                     <Button variant="contained" sx={{margin: '0 5px',padding: '8px'}}
                             disabled={disabledButton}
                             onClick={async(e) => {
-                             await   submitData(e, personId as string, form.name, form.surName)
+                             await   submitData(e, personId as string, form.name, form.surName,form.position as PositionList,form.salary)
                             }}>Submit</Button>
                 </Box>
 
