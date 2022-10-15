@@ -7,8 +7,12 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import * as React from "react";
-import { NewPersonPosition } from "../../../../../backend/types/newPesonPosition";
-import { PositionList } from "../../../../../backend/types/personPosition";
+import {NewPersonPosition} from "../../../../../backend/types/newPesonPosition";
+import {PositionList} from "../../../../../backend/types/personPosition";
+import {FormControl, FormHelperText, FormLabel} from "@mui/material";
+import Select from "@mui/material/Select";
+import {positionList} from "../../../data/positionList";
+import MenuItem from "@mui/material/MenuItem";
 
 interface Props {
     person: NewPersonPosition;
@@ -19,10 +23,10 @@ export const SinglePersonForm = (props: Props) => {
 
     const isFirstRender = useRef(true)
 
-    const {name, surName, personId,position,salary} = props.person;
+    const {name, surName, personId, position, salary} = props.person;
     const dispatch = useDispatch();
 
-    const [form, setForm] = useState<NewPersonPosition>({personId,name,surName,position,salary})
+    const [form, setForm] = useState<NewPersonPosition>({personId, name, surName, position, salary})
     const [disabledButton, setDisabledButton] = useState<boolean>(true);
 
     const disabledHandler = () => {
@@ -30,14 +34,15 @@ export const SinglePersonForm = (props: Props) => {
             isFirstRender.current = false
             return;
         }
-        (form.name !== name || form.surName !== surName) ? setDisabledButton(false) : setDisabledButton(true);
+        (form.name !== name || form.surName !== surName || form.position !== position || form.salary !== salary) ? setDisabledButton(false) : setDisabledButton(true);
     }
 
 
-    useEffect(disabledHandler, [form.surName, form.name, name, surName]);
+    // useEffect(disabledHandler, [form.surName, form.name, name, surName]);
+    useEffect(disabledHandler, [form]);
 
 
-    const submitData = async (e: FormEvent, personId: string, personName: string, surName: string,position:PositionList, salary:number) => {
+    const submitData = async (e: FormEvent, personId: string, personName: string, surName: string, position: PositionList, salary: number) => {
         e.preventDefault();
 
         try {
@@ -46,9 +51,9 @@ export const SinglePersonForm = (props: Props) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({personId,personName,surName,position,salary}),
+                body: JSON.stringify({personId, personName, surName, position, salary}),
             });
-            dispatch(updatePerson({id: personId, name: personName, surName}));
+            dispatch(updatePerson({id: personId, name: personName, surName, position, salary}));
             setDisabledButton(false);
             props.modify();
         } catch (e) {
@@ -65,7 +70,6 @@ export const SinglePersonForm = (props: Props) => {
     return (
 
 
-
         <form className={'styledForm'}>
             <TextField id="outlined-basic" label="Name" variant="outlined" value={form.name} sx={{padding: '8px'}}
                        onChange={e => updateForm('name', e.target.value, form, setForm)}/>
@@ -75,26 +79,70 @@ export const SinglePersonForm = (props: Props) => {
             <TextField id="outlined-basic" label="salary" variant="outlined" value={form.salary}
                        sx={{padding: '8px'}}
                        onChange={e => updateForm('salary', e.target.value, form, setForm)}/>
-            <TextField id="outlined-basic" label="position" variant="outlined" value={form.position}
-                       sx={{padding: '8px'}}
-                       onChange={e => updateForm('position', e.target.value, form, setForm)}/>
+            {/*<TextField id="outlined-basic" label="position" variant="outlined" value={form.position}*/}
+            {/*           sx={{padding: '8px'}}*/}
+            {/*           onChange={e => updateForm('position', e.target.value, form, setForm)}/>*/}
+
+
+            <FormControl fullWidth={true}
+                         // error={error}
+                        //  className={'styledForm'}
+            >
+                <FormLabel id="position-label">position</FormLabel>
+                <Select
+                    // error={error}
+                    labelId="position-label"
+                    id="demo-simple-select"
+                    value={form.position}
+                    label="position"
+                    onChange={e => updateForm('position', e.target.value, form, setForm)}
+                    renderValue={(selected) => {
+                        if (typeof selected === "string" && selected.length === 0) {
+                            return <em>Position</em>;
+                        }
+
+                        return selected;
+                    }}
+                >
+
+                    {positionList.map((position) => {
+                        return (
+                            <MenuItem key={position} value={position}>{position}</MenuItem>
+                        )
+                    })}
+
+
+                </Select>
+                {/*<FormHelperText>{errorMessage}</FormHelperText>*/}
+            </FormControl>
+
+
+
+
+
+
+
+
+
+
 
 
 
             <Box
-                    sx={{
-                        width: '100%',
-                        textAlign: 'center'
+                sx={{
+                    width: '100%',
+                    textAlign: 'center'
 
-                    }}
-                >
-                    <Button variant="outlined" sx={{margin: '0 5px',padding: '8px'}} onClick={cancelHandler}>Cancel</Button>
-                    <Button variant="contained" sx={{margin: '0 5px',padding: '8px'}}
-                            disabled={disabledButton}
-                            onClick={async(e) => {
-                             await   submitData(e, personId as string, form.name, form.surName,form.position as PositionList,form.salary)
-                            }}>Submit</Button>
-                </Box>
+                }}
+            >
+                <Button variant="outlined" sx={{margin: '0 5px', padding: '8px'}}
+                        onClick={cancelHandler}>Cancel</Button>
+                <Button variant="contained" sx={{margin: '0 5px', padding: '8px'}}
+                        disabled={disabledButton}
+                        onClick={async (e) => {
+                            await submitData(e, personId as string, form.name, form.surName, form.position as PositionList, form.salary)
+                        }}>Submit</Button>
+            </Box>
 
         </form>
 

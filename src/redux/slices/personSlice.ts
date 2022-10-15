@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import { UsersState} from "../store/storeType";
+import {UsersState} from "../store/storeType";
 
 
 export const getPeopleList = createAsyncThunk(
@@ -28,22 +28,22 @@ export const personSlice = createSlice({
     name: 'personList',
     initialState,
     reducers: {
-        removePersonFromState: (state:UsersState, {payload}) : UsersState=> {
+        removePersonFromState: (state: UsersState, {payload}): UsersState => {
             const {id} = payload;
             const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== id);
             console.log(id);
-console.log(filteredPersonList)
+            console.log(filteredPersonList)
             return {...state, receivedData: {personPositionData: filteredPersonList}}
         },
 
 
-        updatePerson: (state:UsersState, {payload}) => {
-            const {id, name, surName} = payload;
+        updatePerson: (state: UsersState, {payload}) => {
+            const {id, name, surName, position, salary} = payload;
 
             state.receivedData.personPositionData = state.receivedData.personPositionData.map(el => el.personId !== id ? el : {
                 ...el,
                 name,
-                surName
+                surName, position, salary
             });
         }
     },
