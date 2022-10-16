@@ -17,21 +17,27 @@ import {validationFunction} from "./functions/validationFunction";
 import {availableLabels} from './functions/validationFunction'
 import {StoreInterface} from "../../redux/store/storeType";
 
+
+
+export const unexpectedSeverityStatusState: SeverityStatus = {
+    status: 'error',
+    message: 'unexpected error, please try again later'
+}
+
+export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
+    status: 'error',
+    message: 'please correct highlighted fields'
+}
+
+
+
 export const AddPerson = () => {
 
 
     const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
 
 
-    const unexpectedSeverityStatusState: SeverityStatus = {
-        status: 'error',
-        message: 'unexpected error, please try again later'
-    }
 
-    const frontEndErrValidationSeverityStatusState: SeverityStatus = {
-        status: 'error',
-        message: 'please correct highlighted fields'
-    }
 
     const [loading, setLoading] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);

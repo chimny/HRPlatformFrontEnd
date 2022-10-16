@@ -9,11 +9,15 @@ import Paper from '@mui/material/Paper';
 import {useDispatch, useSelector} from "react-redux";
 import {StoreInterface} from "../../redux/store/storeType";
 import {AppDispatch} from "../../redux/store/store";
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {getPeopleList, removePerson, removePersonFromState} from "../../redux/slices/personSlice";
 import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {PersonActions} from "./SinglePerson/PersonActions";
+import Snackbar from "@mui/material/Snackbar";
+import {Alert} from "@mui/material";
+
+
 
 
 export const PersonList = () => {
@@ -24,7 +28,22 @@ export const PersonList = () => {
 
     const resStatus = useSelector((state: StoreInterface) => state.personList.status)
 
-    console.log(listedPersons);
+
+    const [open, setOpen] = useState<boolean>(false);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+
+
 
 
     const deleteHandler = useCallback((id: string) => {
@@ -80,6 +99,18 @@ export const PersonList = () => {
                     ))}
                 </TableBody>
             </Table>
+
+
+            <Snackbar open={true} autoHideDuration={8000} onClose={handleClose}>
+
+                <Alert onClose={handleClose} severity={undefined} sx={{width: '100%'}}>
+                    {/*{severityStatus.message}*/}
+                 test message
+                </Alert>
+
+            </Snackbar>
+
+
         </TableContainer>
     );
 }
