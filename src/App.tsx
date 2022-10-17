@@ -12,6 +12,7 @@ import { SalaryData } from './components/Salary/SalaryData';
 import {AddPerson} from "./components/AddPerson/AddPerson";
 import {Navigation} from "./components/Navigation/Navigation";
 import {PersonList} from "./components/PersonList/PersonList";
+import {PersonFilledGetForm} from "./components/PersonList/SinglePerson/PersonFilledGetForm";
 
 
 
@@ -26,7 +27,8 @@ function App() {
           <Routes>
               {/*@todo test route below*/}
               <Route path='/' element={<Home/>}/>
-              <Route path='/persons' element={<PersonList/>}/>
+              <Route path='/personList' element={<PersonList/>}/>
+              <Route path='/personList/chosenPerson/:personID' element={<PersonFilledGetForm/>}/>
               <Route path='/addPerson' element={<AddPerson/>}/>
               <Route path='/position-list' element={<PositionList/>}/>
               <Route path='/salary-data' element={<SalaryData/>}/>

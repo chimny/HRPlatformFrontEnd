@@ -27,7 +27,7 @@ const pagesUpdate: pageNavigation[] = [{
 },
     {
         name: 'Person List',
-        path: '/persons'
+        path: '/personList'
     },
     {
         name: 'Add person',

@@ -118,9 +118,6 @@ export const SinglePersonForm = (props: Props) => {
                 <TextField id="outlined-basic" label="salary" variant="outlined" value={form.salary}
                            sx={{padding: '8px'}}
                            onChange={e => updateForm('salary', e.target.value, form, setForm)}/>
-                {/*<TextField id="outlined-basic" label="position" variant="outlined" value={form.position}*/}
-                {/*           sx={{padding: '8px'}}*/}
-                {/*           onChange={e => updateForm('position', e.target.value, form, setForm)}/>*/}
 
 
                 <FormControl fullWidth={true}

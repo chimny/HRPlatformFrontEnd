@@ -46,6 +46,9 @@ export const PersonList = () => {
 
 
 
+
+
+
     const deleteHandler = useCallback((id: string) => {
         dispatch(removePerson(id));
         dispatch(removePersonFromState({id}))
