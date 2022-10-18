@@ -9,6 +9,7 @@ import {Alert, Button, Container, Snackbar} from "@mui/material";
 import {FormEvent, useState} from "react";
 import { InsertedPersonRes } from "../../../../backend/types/person";
 import {restartForm} from "../../redux/slices/updateFormSlice";
+import { Link } from "react-router-dom";
 
 
 export const unexpectedSeverityStatusState: SeverityStatus = {
@@ -117,10 +118,16 @@ export const UpdatePersonForm = () => {
                     )
                 })}
 
-                <Button variant="contained" sx={{margin: '12px auto'}}
-                        onClick={sendForm}
+            <Button variant="contained" sx={{margin: '12px auto'}}
+                               onClick={sendForm}
 
-                >Send</Button>
+           >Send</Button>
+                <Link to={`/personList`} >
+               <Button variant="contained" sx={{margin: '12px auto'}}
+
+
+               >Go Back</Button>
+                </Link>
             </form>
 
             <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>

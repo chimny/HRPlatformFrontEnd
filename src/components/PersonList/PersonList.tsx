@@ -13,7 +13,7 @@ import {useCallback, useEffect, useState} from "react";
 import {getPeopleList, removePerson, removePersonFromState} from "../../redux/slices/personSlice";
 import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
-import {PersonActions} from "./SinglePerson/PersonActions";
+import {PersonActions} from "./PersonActions";
 import Snackbar from "@mui/material/Snackbar";
 import {Alert} from "@mui/material";
 
@@ -24,28 +24,8 @@ export const PersonList = () => {
 
 
     const listedPersons = useSelector((state: StoreInterface) => state.personList.receivedData.personPositionData)
-    const dispatch = useDispatch<AppDispatch>();
-
     const resStatus = useSelector((state: StoreInterface) => state.personList.status)
-
-
-    const [open, setOpen] = useState<boolean>(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-    };
-
-
-
-
-
+    const dispatch = useDispatch<AppDispatch>();
 
 
 
@@ -96,7 +76,7 @@ export const PersonList = () => {
                             <TableCell align="right">{person.surName}</TableCell>
                             <TableCell align="right">{person.position}</TableCell>
                             <TableCell align="right">{person.salary}</TableCell>
-                            <TableCell align="right"><PersonActions person={person}
+                            <TableCell align="right"><PersonActions personId={person.personId}
                                                                     onDelete={() => deleteHandler(person.personId as string)}/></TableCell>
                         </TableRow>
                     ))}
@@ -104,14 +84,7 @@ export const PersonList = () => {
             </Table>
 
 
-            <Snackbar open={true} autoHideDuration={8000} onClose={handleClose}>
 
-                <Alert onClose={handleClose} severity={undefined} sx={{width: '100%'}}>
-                    {/*{severityStatus.message}*/}
-                 test message
-                </Alert>
-
-            </Snackbar>
 
 
         </TableContainer>

@@ -31,7 +31,7 @@ export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
 
 
 
-export const AddNewPerson = () => {
+export const AddNewPersonForm = () => {
 
 
     const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
