@@ -1,22 +1,14 @@
-import {FormEvent, useState} from "react"
-import {InsertedPersonRes} from "../../../../backend/types/person";
-import {useDispatch} from "react-redux";
-import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
-import './styledForm.css'
-import {Spinner} from "../Spinner/Spinner";
-import * as React from "react";
-import Snackbar from "@mui/material/Snackbar";
-import {Alert} from "@mui/material";
 import {SeverityStatus} from "./interface/severityStatusInterface";
 import {FormInterface, SingleInput} from "./SingleInput";
-import {useSelector} from "react-redux";
-import {restartForm} from "../../redux/slices/formSlice";
+import {StoreInterface} from "../../redux/store/storeType";
+import {useDispatch, useSelector} from "react-redux";
+import {Spinner} from "../Spinner/Spinner";
 import {AppDispatch} from "../../redux/store/store";
 import {validationFunction} from "./functions/validationFunction";
-import {availableLabels} from './functions/validationFunction'
-import {StoreInterface} from "../../redux/store/storeType";
-
+import {Alert, Button, Container, Snackbar} from "@mui/material";
+import {FormEvent, useState} from "react";
+import { InsertedPersonRes } from "../../../../backend/types/person";
+import {restartForm} from "../../redux/slices/updateFormSlice";
 
 
 export const unexpectedSeverityStatusState: SeverityStatus = {
@@ -30,13 +22,10 @@ export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
 }
 
 
-
-export const AddPerson = () => {
+export const UpdatePersonForm = () => {
 
 
     const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
-
-
 
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -103,7 +92,6 @@ export const AddPerson = () => {
         } finally {
             setLoading(false);
             handleClick();
-            // setForm(initialState);
 
         }
 
