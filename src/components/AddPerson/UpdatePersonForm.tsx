@@ -6,10 +6,13 @@ import {Spinner} from "../Spinner/Spinner";
 import {AppDispatch} from "../../redux/store/store";
 import {validationFunction} from "./functions/validationFunction";
 import {Alert, Button, Container, Snackbar} from "@mui/material";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import { InsertedPersonRes } from "../../../../backend/types/person";
-import {restartForm} from "../../redux/slices/updateFormSlice";
+// import {restartForm} from "../../redux/slices/updateFormSlice";
 import { Link } from "react-router-dom";
+import {getPeopleList} from "../../redux/slices/personSlice";
+import {useParams} from "react-router";
+import {receivePerson} from "../../redux/slices/updateFormSlice";
 
 
 export const unexpectedSeverityStatusState: SeverityStatus = {
@@ -24,6 +27,16 @@ export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
 
 
 export const UpdatePersonForm = () => {
+    const dispatch = useDispatch<AppDispatch>();
+
+    let { personID } = useParams();
+
+    console.log(personID);
+
+    useEffect(() => {
+        dispatch(receivePerson(personID as string))
+    }, [dispatch])
+
 
 
     const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
@@ -34,7 +47,7 @@ export const UpdatePersonForm = () => {
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>(frontEndErrValidationSeverityStatusState)
 
 
-    const dispatch = useDispatch<AppDispatch>();
+
 
     const handleClick = () => {
         setOpen(true);
@@ -83,7 +96,7 @@ export const UpdatePersonForm = () => {
 
             if (responseMes.status === 'success') {
                 setSeverityStatus({status: responseMes.status, message: responseMes.message})
-                dispatch(restartForm());
+                // dispatch(restartForm());
             }
 
 
