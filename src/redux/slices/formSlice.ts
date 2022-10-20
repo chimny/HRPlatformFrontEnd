@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import {FormInterface} from "../../components/AddPerson/SingleInput";
+import {FormInterface} from "../../components/Form/SingleInput";
 import { InsertedPersonRes } from "../../../../backend/types/person";
 
 

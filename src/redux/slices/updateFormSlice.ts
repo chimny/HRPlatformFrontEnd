@@ -1,7 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import {FormInterface} from "../../components/AddPerson/SingleInput";
+import {FormInterface} from "../../components/Form/SingleInput";
 import { InsertedPersonRes } from "../../../../backend/types/person";
 import {getPeopleList} from "./personSlice";
+import {formUpdateState, UsersState} from "../store/storeType";
 
 
 // const initialState: FormInterface[]
@@ -11,10 +12,15 @@ import {getPeopleList} from "./personSlice";
     {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
 ]*/
 
-const initialState: any = {
-    receivedData: undefined,
+//@todo rewrite logic to migrate json data into formInitial state
+const initialState: formUpdateState = {
+    receivedData: {chosenPersonData: null},
+    formInitialData: null,
     status: null
 }
+
+
+
 
 // export const submitUpdatePerson = createAsyncThunk(
 //     'updatePersonForm/submitUpdatePerson',

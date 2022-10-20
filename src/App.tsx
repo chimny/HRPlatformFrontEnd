@@ -9,10 +9,10 @@ import { Home } from './components/Home/Home';
 
 import { PositionList } from './components/Position/PositionList';
 import { SalaryData } from './components/Salary/SalaryData';
-import {AddNewPersonForm} from "./components/AddPerson/AddNewPersonForm";
+import {AddNewPersonForm} from "./components/Form/AddNewPersonForm";
 import {Navigation} from "./components/Navigation/Navigation";
 import {PersonList} from "./components/PersonList/PersonList";
-import {UpdatePersonForm} from "./components/AddPerson/UpdatePersonForm";
+import {UpdatePersonForm} from "./components/Form/UpdatePersonForm";
 
 
 
