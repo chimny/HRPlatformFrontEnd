@@ -8,14 +8,14 @@ export interface  UsersState {
         status: null | 'pending' | 'succeeded' | 'failed'
 }
 
-export interface  formUpdateState {
+export interface UpdateFormStoreInterface {
     receivedData: { chosenPersonData: NewPersonPosition } | { chosenPersonData: null },
-    formInitialData: any,
+    formData: FormInterface[],
     status: null | 'pending' | 'succeeded' | 'failed'
 }
 
 
-export interface StoreInterface {
+export interface PersonStoreInterface {
     personList: UsersState,
     addPersonForm: FormInterface[],
 }

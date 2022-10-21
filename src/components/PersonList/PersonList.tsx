@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useDispatch, useSelector} from "react-redux";
-import {StoreInterface} from "../../redux/store/storeType";
+import {PersonStoreInterface} from "../../redux/store/storeType";
 import {AppDispatch} from "../../redux/store/store";
 import {useCallback, useEffect, useState} from "react";
 import {getPeopleList, removePerson, removePersonFromState} from "../../redux/slices/personSlice";
@@ -23,8 +23,8 @@ import {Alert} from "@mui/material";
 export const PersonList = () => {
 
 
-    const listedPersons = useSelector((state: StoreInterface) => state.personList.receivedData.personPositionData)
-    const resStatus = useSelector((state: StoreInterface) => state.personList.status)
+    const listedPersons = useSelector((state: PersonStoreInterface) => state.personList.receivedData.personPositionData)
+    const resStatus = useSelector((state: PersonStoreInterface) => state.personList.status)
     const dispatch = useDispatch<AppDispatch>();
 
 

@@ -2,20 +2,20 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
 import {FormInterface} from "../../components/Form/SingleInput";
 import { InsertedPersonRes } from "../../../../backend/types/person";
 import {getPeopleList} from "./personSlice";
-import {formUpdateState, UsersState} from "../store/storeType";
+import {UpdateFormStoreInterface, UsersState} from "../store/storeType";
 
 
 // const initialState: FormInterface[]
-/*const initialState: any = [{label:'name',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
+const formInitialState: FormInterface[] = [{label:'name',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
     {label:'surname',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
     {label:'salary',value:'',error:false,errorMessage:'',inputFieldType:'textField'},
     {label:'position',value:'',error:false,errorMessage:'',inputFieldType:'select'},
-]*/
+]
 
 //@todo rewrite logic to migrate json data into formInitial state
-const initialState: formUpdateState = {
+const initialState: UpdateFormStoreInterface = {
     receivedData: {chosenPersonData: null},
-    formInitialData: null,
+    formData: formInitialState,
     status: null
 }
 
@@ -44,12 +44,7 @@ export const receivePerson = createAsyncThunk(
     async (personID:string,thunkAPI) => {
 
         const res = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
-        // const responseMes: InsertedPersonRes = await res.json();
-
         return await res.json()
-
-
-
 
     }
 )
@@ -61,10 +56,11 @@ export const updateFormSlice = createSlice({
     initialState,
     reducers: {
         //
-        // updateForm: (state:FormInterface[], {payload}) => {
-        //     const {label,value} = payload;
-        //     return state.map(el => el.label === label ? {...el,value:value}: {...el})
-        // },
+        updateForm: (state:any, {payload}) => {
+            const receivedStateData = state.receivedData.chosenPersonData
+            const {label,value} = payload;
+            return state.formData = state.formData.map((el:any) => el.label === label ? {...el,value:value}: {...el})
+        },
         //
         // setError: (state,{payload})=>{
         //     const {label, errorMsg} = payload;

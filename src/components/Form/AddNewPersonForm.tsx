@@ -15,7 +15,7 @@ import {restartForm} from "../../redux/slices/formSlice";
 import {AppDispatch} from "../../redux/store/store";
 import {validationFunction} from "./functions/validationFunction";
 import {availableLabels} from './functions/validationFunction'
-import {StoreInterface} from "../../redux/store/storeType";
+import {PersonStoreInterface} from "../../redux/store/storeType";
 
 
 
@@ -34,7 +34,7 @@ export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
 export const AddNewPersonForm = () => {
 
 
-    const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
+    const reduxValue: FormInterface[] = useSelector((state: PersonStoreInterface) => state.addPersonForm);
 
 
 

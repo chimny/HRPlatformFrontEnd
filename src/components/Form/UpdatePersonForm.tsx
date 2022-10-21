@@ -1,6 +1,6 @@
 import {SeverityStatus} from "./interface/severityStatusInterface";
 import {FormInterface, SingleInput} from "./SingleInput";
-import {StoreInterface} from "../../redux/store/storeType";
+import {UpdateFormStoreInterface, PersonStoreInterface} from "../../redux/store/storeType";
 import {useDispatch, useSelector} from "react-redux";
 import {Spinner} from "../Spinner/Spinner";
 import {AppDispatch} from "../../redux/store/store";
@@ -26,12 +26,30 @@ export const frontEndErrValidationSeverityStatusState: SeverityStatus = {
 }
 
 
+
+
+
 export const UpdatePersonForm = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     let { personID } = useParams();
 
-    console.log(personID);
+
+    const receivedData =  useSelector((state: UpdateFormStoreInterface) => state.receivedData.chosenPersonData);
+
+    // const receivedData = reduxValue
+    // const newData: any = {};
+
+    if(receivedData){
+        for (const record of receivedData) {
+            // validationFunction(input.label, input.value, dispatch)
+            // newData[`${input.label}`] = input.value
+        }
+
+    }
+
+
+
 
     useEffect(() => {
         dispatch(receivePerson(personID as string))
@@ -39,7 +57,7 @@ export const UpdatePersonForm = () => {
 
 
 
-    const reduxValue: FormInterface[] = useSelector((state: StoreInterface) => state.addPersonForm);
+
 
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -65,13 +83,13 @@ export const UpdatePersonForm = () => {
     const sendForm = async (e: FormEvent) => {
         e.preventDefault();
 
-        const receivedData = reduxValue
-        const newData: any = {};
 
-        for (const input of receivedData) {
-            validationFunction(input.label, input.value, dispatch)
-            newData[`${input.label}`] = input.value
-        }
+        // const newData: any = {};
+        //
+        // for (const input of receivedData) {
+        //     validationFunction(input.label, input.value, dispatch)
+        //     newData[`${input.label}`] = input.value
+        // }
 
 
         setLoading(true);
@@ -81,15 +99,15 @@ export const UpdatePersonForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newData),
+                // body: JSON.stringify(newData),
             });
 
 
-            if (reduxValue.find(el => el.error)) {
-                setSeverityStatus(frontEndErrValidationSeverityStatusState);
-
-                return
-            }
+            // if (reduxValue.find(el => el.error)) {
+            //     setSeverityStatus(frontEndErrValidationSeverityStatusState);
+            //
+            //     return
+            // }
 
 
             const responseMes: InsertedPersonRes = await res.json();
@@ -124,12 +142,13 @@ export const UpdatePersonForm = () => {
         >
             <form className={'styledForm'}>
 
-                {reduxValue.map(({label, value, error, errorMessage, inputFieldType}) => {
-                    return (
-                        <SingleInput key={label} label={label} value={value} errorMessage={errorMessage}
-                                     inputFieldType={inputFieldType} error={error}/>
-                    )
-                })}
+                {/*@todo below shows input*/}
+                {/*{reduxValue.map(({label, value, error, errorMessage, inputFieldType}) => {*/}
+                {/*    return (*/}
+                {/*        <SingleInput key={label} label={label} value={value} errorMessage={errorMessage}*/}
+                {/*                     inputFieldType={inputFieldType} error={error}/>*/}
+                {/*    )*/}
+                {/*})}*/}
 
             <Button variant="contained" sx={{margin: '12px auto'}}
                                onClick={sendForm}
