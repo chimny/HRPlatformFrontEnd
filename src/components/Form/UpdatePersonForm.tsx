@@ -35,18 +35,7 @@ export const UpdatePersonForm = () => {
     let { personID } = useParams();
 
 
-    const receivedData =  useSelector((state: UpdateFormStoreInterface) => state.receivedData.chosenPersonData);
 
-    // const receivedData = reduxValue
-    // const newData: any = {};
-
-    if(receivedData){
-        for (const record of receivedData) {
-            // validationFunction(input.label, input.value, dispatch)
-            // newData[`${input.label}`] = input.value
-        }
-
-    }
 
 
 
@@ -56,7 +45,20 @@ export const UpdatePersonForm = () => {
     }, [dispatch])
 
 
+    //@todo review data below
+    const receivedData =  useSelector((state: UpdateFormStoreInterface) => state.receivedData.chosenPersonData);
 
+    // const receivedData = reduxValue
+    // const newData: any = {};
+
+    // if(receivedData){
+    //     for (const record in receivedData) {
+    //         // validationFunction(input.label, input.value, dispatch)
+    //         // newData[`${input.label}`] = input.value
+    //         console.log(Object.keys)
+    //     }
+    //
+    // }
 
 
 
