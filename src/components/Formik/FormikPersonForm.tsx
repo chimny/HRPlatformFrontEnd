@@ -1,8 +1,10 @@
 import React from 'react';
 import {Field, Form, useFormik} from 'formik';
 import * as yup from 'yup';
-import {Button, Select, TextField} from "@mui/material";
+import {Button, FormControl, FormHelperText, FormLabel, Select, TextField} from "@mui/material";
 import {updateForm} from "../../redux/slices/formSlice";
+import {positionList} from "../../data/positionList";
+import MenuItem from "@mui/material/MenuItem";
 
 
 const validationSchema = yup.object({
@@ -29,15 +31,15 @@ const validationSchema = yup.object({
         .string()
         .min(3, 'surname should include at least 3 signs!')
         .max(50, 'surname length is maximum 50')
-        .required('surname is required'),
-    position: yup
-        .string()
-        .min(3, 'surname should include at least 3 signs!')
-        .max(50, 'surname length is maximum 50')
-        .required('surname is required'),
+        .required('salary is required'),
+    // position: yup
+    //     .string()
+    //     .min(3, 'surname should include at least 3 signs!')
+    //     .max(50, 'surname length is maximum 50')
+    //     .required('surname is required'),
 });
 
-export const Formik = () => {
+export const FormikPersonForm = () => {
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -78,18 +80,6 @@ export const Formik = () => {
                             error={formik.touched.surname && Boolean(formik.errors.surname)}
                             helperText={formik.touched.surname && formik.errors.surname}
                         />
-                        {/*<label htmlFor="position">Position</label>*/}
-                        {/*<Field*/}
-                        {/*    component="select"*/}
-                        {/*    id="position"*/}
-                        {/*    name="position"*/}
-                        {/*    multiple={true}*/}
-                        {/*>*/}
-                        {/*    <option value="NY">New York</option>*/}
-                        {/*    <option value="SF">San Francisco</option>*/}
-                        {/*    <option value="CH">Chicago</option>*/}
-                        {/*    <option value="OTHER">Other</option>*/}
-                        {/*</Field>*/}
 
                         <TextField
                             fullWidth
@@ -101,6 +91,41 @@ export const Formik = () => {
                             error={formik.touched.salary && Boolean(formik.errors.salary)}
                             helperText={formik.touched.salary && formik.errors.salary}
                         />
+
+
+                        <FormControl className={'styledForm'} fullWidth={true}
+                                     error={formik.touched.salary && Boolean(formik.errors.salary)}
+                        >
+                            {/*@todo update form postinion*/}
+                            <FormLabel id="position-label">position</FormLabel>
+                            <Select
+                                error={formik.touched.salary && Boolean(formik.errors.salary)}
+                                labelId="position-label"
+                                id="demo-simple-select"
+                                value={formik.values.position}
+                                label="position"
+
+                                onChange={e => formik.handleChange(e.target.value)}
+                                renderValue={(selected) => {
+                                    if (typeof selected === "string" && selected.length === 0) {
+                                        return <em>Position</em>;
+                                    }
+
+                                    return selected;
+                                }}
+                            >
+
+                                {positionList.map((position) => {
+                                    return (
+                                        <MenuItem key={position} value={position}>{position}</MenuItem>
+                                    )
+                                })}
+
+
+                            </Select>
+                            <FormHelperText>{'test message'}</FormHelperText>
+                        </FormControl>
+
 
                         <Button color="primary" variant="contained" fullWidth type="submit">
                             Submit

@@ -2,11 +2,12 @@ import { Input } from "./fieldType/Input";
 import { Select } from "./fieldType/Select";
 
 export interface FormikInterface {
-    control ?:  string;
-    option ?: object
+    control ?:  'input' | 'select';
+    options ?: object
     label : string;
     name : string;
     type : string;
+
 }
 
 
