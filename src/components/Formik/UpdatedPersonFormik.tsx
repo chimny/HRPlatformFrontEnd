@@ -1,15 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useFormik,Field } from 'formik';
+import {useFormik, Field} from 'formik';
 import * as yup from 'yup';
 import {TextField, Button, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
+import {FormikSelect, FormikSelectItems} from './FormikSelect';
 
 
+interface FormValues {
+    name: string,
+    surname: string,
+    position: string,
+    salary: number | ""
+}
+
+const positionItems: FormikSelectItems[] = [{label:'assistant', value:'assistant' },{label:'junior', value:'junior' },{label:'manager', value:'manager' }
+]
 
 
-
-
-
+const initialValues: FormValues = {
+    name: '',
+    surname: '',
+    position: '',
+    salary: ''
+}
 
 const validationSchema = yup.object({
     name: yup
@@ -31,12 +44,7 @@ const validationSchema = yup.object({
 
 export const UpdatedPersonFormik = () => {
     const formik = useFormik({
-        initialValues: {
-            name: '',
-            surname: '',
-            position: '',
-            salary: ''
-        },
+        initialValues,
         validationSchema: validationSchema,
         onSubmit: (values) => {
             alert(JSON.stringify(values, null, 2));
@@ -47,6 +55,7 @@ export const UpdatedPersonFormik = () => {
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <TextField
+                    autoComplete='off'
                     fullWidth
                     id="name"
                     name="name"
@@ -57,6 +66,7 @@ export const UpdatedPersonFormik = () => {
                     helperText={formik.touched.name && formik.errors.name}
                 />
                 <TextField
+                    autoComplete='off'
                     fullWidth
                     id="surname"
                     name="surname"
@@ -67,6 +77,7 @@ export const UpdatedPersonFormik = () => {
                     helperText={formik.touched.surname && formik.errors.surname}
                 />
                 <TextField
+                    autoComplete='off'
                     fullWidth
                     id="salary"
                     name="salary"
@@ -77,33 +88,9 @@ export const UpdatedPersonFormik = () => {
                     error={formik.touched.salary && Boolean(formik.errors.salary)}
                     helperText={formik.touched.salary && formik.errors.salary}
                 />
-                {/*below manual select which works*/}
-                <select
-                    name="position"
-                    value={formik.values.position}
-                    onChange={formik.handleChange}
-                    // onBlur={handleBlur}
-                    // style={{ display: "block" }}
-                >
-                    <option value="" label="Choose the position">
-                        Select a color{" "}
-                    </option>
-                    <option value="red" label="red">
-                        {" "}
-                        red
-                    </option>
-                    <option value="blue" label="blue">
-                        blue
-                    </option>
 
-                    <option value="green" label="green">
-                        green
-                    </option>
-                </select>
-
-                {/*start of material ui*/}
-
-
+                {/*start of select component*/}
+                <FormikSelect label={'position'} items={positionItems}/>
 
 
                 {/*end of material ui*/}
