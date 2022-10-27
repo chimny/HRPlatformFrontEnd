@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Field, ErrorMessage, FieldInputProps } from "formik";
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
 
+import './FormikField.css'
 
 export interface FormikSelectItem {
     label: string;
@@ -13,6 +14,8 @@ interface FormikSelectProps {
     label: string;
     items: FormikSelectItem[];
     required ?:boolean
+
+
 }
 
 interface MaterialUISelectFieldProps extends FieldInputProps<string>{
@@ -20,6 +23,7 @@ interface MaterialUISelectFieldProps extends FieldInputProps<string>{
     children: ReactNode;
     label: string;
     required: boolean;
+
 }
 
 const MaterialUISelectField: React.FC<MaterialUISelectFieldProps> = ({children, label, errorString,value,name,onChange,onBlur,required}) => {
@@ -27,10 +31,13 @@ const MaterialUISelectField: React.FC<MaterialUISelectFieldProps> = ({children, 
     return (
         <FormControl fullWidth>
             <InputLabel>{label}</InputLabel>
-            <Select name={name} onChange={onChange} onBlur={onBlur} value={value}>
+            {/*@todo pass  the props with error*/}
+            <Select name={name} onChange={onChange} onBlur={onBlur} value={value}
+                    // error={true}
+            >
                 {children}
             </Select>
-            <FormHelperText>{errorString}</FormHelperText>
+            <FormHelperText error>{errorString}</FormHelperText>
         </FormControl>
     )
 }
@@ -39,7 +46,7 @@ const MaterialUISelectField: React.FC<MaterialUISelectFieldProps> = ({children, 
 export const FormikSelect: React.FC<FormikSelectProps> = ({label, items, name,required = false }) => {
 
     return (
-        <div>
+        <div className='FormikField'>
             <Field
                 name={name}
                 as={MaterialUISelectField}

@@ -1,0 +1,14 @@
+.FormikField {
+    margin: 16px 0;
+}
+
+.wrapper{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.StyledButton{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}

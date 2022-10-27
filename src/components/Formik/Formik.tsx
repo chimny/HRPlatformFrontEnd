@@ -1,9 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {useFormik, Field, FormikProvider} from 'formik';
 import * as yup from 'yup';
 import {TextField, Button, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import {FormikSelect, FormikSelectItem} from './FormikSelect';
+
+import './FormikField.css'
 
 
 interface FormValues {
@@ -17,12 +18,7 @@ const positionItems: FormikSelectItem[] = [{label:'assistant', value:'assistant'
 ]
 
 
-const initialValues: FormValues = {
-    name: '',
-    surname: '',
-    position: '',
-    salary: ''
-}
+
 
 const validationSchema = yup.object({
     name: yup
@@ -39,10 +35,24 @@ const validationSchema = yup.object({
         .number()
         .min(1, 'salary should be at least 1')
         .max(1000000, 'maximum salary is 1000000')
-        .required('surname is required'),
+        .required('salary is required'),
+    position: yup
+        .string()
+        .required('please choose the position!'),
 });
 
-export const UpdatedPersonFormik = () => {
+export const Formik = () => {
+
+
+    const initialValues: FormValues = {
+        name: '',
+        surname: '',
+        position: '',
+        salary: ''
+    }
+
+
+
     const formik = useFormik({
         initialValues,
         validationSchema: validationSchema,
@@ -52,10 +62,11 @@ export const UpdatedPersonFormik = () => {
     });
 
     return (
-        <div>
+        <div className={'wrapper'}>
             <FormikProvider value={formik}>
             <form onSubmit={formik.handleSubmit}>
-                <TextField
+                <div className='FormikField'> <TextField
+                    className='FormikField'
                     autoComplete='off'
                     fullWidth
                     id="name"
@@ -65,7 +76,11 @@ export const UpdatedPersonFormik = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
                     helperText={formik.touched.name && formik.errors.name}
-                />
+                /></div>
+
+
+
+                <div className='FormikField'>
                 <TextField
                     autoComplete='off'
                     fullWidth
@@ -77,6 +92,9 @@ export const UpdatedPersonFormik = () => {
                     error={formik.touched.surname && Boolean(formik.errors.surname)}
                     helperText={formik.touched.surname && formik.errors.surname}
                 />
+                </div>
+
+                <div className='FormikField'>
                 <TextField
                     autoComplete='off'
                     fullWidth
@@ -88,16 +106,16 @@ export const UpdatedPersonFormik = () => {
                     onChange={formik.handleChange}
                     error={formik.touched.salary && Boolean(formik.errors.salary)}
                     helperText={formik.touched.salary && formik.errors.salary}
-                />
+                /></div>
 
-                {/*start of select component*/}
-                <FormikSelect name={'position'} label={'position'} items={positionItems} />
+                <FormikSelect name={'position'} label={'position'} items={positionItems}   />
 
 
-                {/*end of material ui*/}
-                <Button color="primary" variant="contained" fullWidth type="submit">
+
+                <div className='StyledButton'><Button color="primary" variant="contained"   type="submit">
                     Submit
-                </Button>
+                </Button></div>
+
             </form>
             </FormikProvider>
         </div>
