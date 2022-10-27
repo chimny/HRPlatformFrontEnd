@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {useFormik, Field} from 'formik';
+import {useFormik, Field, FormikProvider} from 'formik';
 import * as yup from 'yup';
 import {TextField, Button, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
-import {FormikSelect, FormikSelectItems} from './FormikSelect';
+import {FormikSelect, FormikSelectItem} from './FormikSelect';
 
 
 interface FormValues {
@@ -13,7 +13,7 @@ interface FormValues {
     salary: number | ""
 }
 
-const positionItems: FormikSelectItems[] = [{label:'assistant', value:'assistant' },{label:'junior', value:'junior' },{label:'manager', value:'manager' }
+const positionItems: FormikSelectItem[] = [{label:'assistant', value:'assistant' },{label:'junior', value:'junior' },{label:'manager', value:'manager' }
 ]
 
 
@@ -53,6 +53,7 @@ export const UpdatedPersonFormik = () => {
 
     return (
         <div>
+            <FormikProvider value={formik}>
             <form onSubmit={formik.handleSubmit}>
                 <TextField
                     autoComplete='off'
@@ -90,7 +91,7 @@ export const UpdatedPersonFormik = () => {
                 />
 
                 {/*start of select component*/}
-                <FormikSelect label={'position'} items={positionItems}/>
+                <FormikSelect name={'position'} label={'position'} items={positionItems} />
 
 
                 {/*end of material ui*/}
@@ -98,6 +99,7 @@ export const UpdatedPersonFormik = () => {
                     Submit
                 </Button>
             </form>
+            </FormikProvider>
         </div>
     );
 };
