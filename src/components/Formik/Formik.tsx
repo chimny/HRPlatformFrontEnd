@@ -108,7 +108,7 @@ export const Formik = () => {
                     helperText={formik.touched.salary && formik.errors.salary}
                 /></div>
 
-                <FormikSelect name={'position'} label={'position'} items={positionItems}   />
+                <FormikSelect name={'position'} label={'position'} items={positionItems} error={Boolean(formik.touched.position && Boolean(formik.errors.position))}  />
 
 
 
