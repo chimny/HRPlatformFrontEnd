@@ -5,6 +5,7 @@ import {TextField, Button, FormControl, Select, InputLabel, MenuItem} from '@mui
 import {FormikSelect, FormikSelectItem} from './FormikSelect';
 
 import './FormikField.css'
+import {positionObj} from "../../data/positionList";
 
 
 interface FormValues {
@@ -14,8 +15,6 @@ interface FormValues {
     salary: number | ""
 }
 
-const positionItems: FormikSelectItem[] = [{label:'assistant', value:'assistant' },{label:'junior', value:'junior' },{label:'manager', value:'manager' }
-]
 
 
 
@@ -108,7 +107,7 @@ export const Formik = () => {
                     helperText={formik.touched.salary && formik.errors.salary}
                 /></div>
 
-                <FormikSelect name={'position'} label={'position'} items={positionItems} error={Boolean(formik.touched.position && Boolean(formik.errors.position))}  />
+                <FormikSelect name={'position'} label={'position'} items={positionObj} error={Boolean(formik.touched.position && Boolean(formik.errors.position))}  />
 
 
 

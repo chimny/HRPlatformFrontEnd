@@ -1,28 +1,29 @@
 import {PositionList} from "../../../backend/types/personPosition";
+import {FormikSelectItem} from "../components/Formik/FormikSelect";
 
 
 interface positionObj{
-    key: PositionList,
+    label: PositionList,
     value: PositionList
 }
 
 export const positionObj:positionObj[] = [{
-    key:'Trainee',
+    label:'Trainee',
     value:'Trainee',
 },{
-    key:'Assistant',
+    label:'Assistant',
     value:'Assistant',
 },{
-    key:'Junior Specialist',
+    label:'Junior Specialist',
     value:'Junior Specialist',
 },{
-    key:'Specialist',
+    label:'Specialist',
     value:'Specialist',
 },{
-    key:'Senior Specialist',
+    label:'Senior Specialist',
     value:'Senior Specialist',
 },{
-    key:'Manager',
+    label:'Manager',
     value:'Manager',
 }];
 

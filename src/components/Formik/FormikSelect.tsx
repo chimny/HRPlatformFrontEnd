@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import {Field, ErrorMessage, FieldInputProps} from "formik";
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, OutlinedInput, Select} from "@mui/material";
 
 import './FormikField.css'
 
@@ -38,11 +38,12 @@ const MaterialUISelectField: React.FC<MaterialUISelectFieldProps> = ({
                                                                      }) => {
 
     return (
-        <FormControl fullWidth>
-            <InputLabel>{label}</InputLabel>
-            {/*@todo pass  the props with error*/}
+        <FormControl fullWidth error={error}>
+            <InputLabel className="SelectInputLabel" variant="outlined" id='selectLabel' >{label}</InputLabel>
             <Select name={name} onChange={onChange} onBlur={onBlur} value={value}
                     error={error}
+                    id='selectLabel'
+                    labelId="selectLabel"
             >
                 {children}
             </Select>
