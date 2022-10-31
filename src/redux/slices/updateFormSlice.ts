@@ -22,23 +22,6 @@ const initialState: UpdateFormStoreInterface = {
 
 
 
-// export const submitUpdatePerson = createAsyncThunk(
-//     'updatePersonForm/submitUpdatePerson',
-//     async () => {
-//
-//         const res = await fetch(`http://localhost:3001/addPerson`, {
-//             method: 'PATCH',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(initialState),
-//         });
-//         const responseMes: InsertedPersonRes = await res.json();
-//
-//     }
-// )
-
-
 export const receivePerson = createAsyncThunk(
     'updatePersonForm/receivePerson',
     async (personID:string,thunkAPI) => {
@@ -61,19 +44,7 @@ export const updateFormSlice = createSlice({
             const {label,value} = payload;
             return state.formData = state.formData.map((el:any) => el.label === label ? {...el,value:value}: {...el})
         },
-        //
-        // setError: (state,{payload})=>{
-        //     const {label, errorMsg} = payload;
-        //     // return state.map( el => el.label === label ? {...el,error:true,errorMessage:errorMsg}: {...el})
-        // },
-        //
-        // clearError: (state,{payload})=>{
-        //     const {label} = payload;
-        //     // return state.map( el => el.label === label ? {...el,error:false,errorMessage:''}: {...el})
-        // },
-        //
-        // restartForm: ()=> initialState,
-        //
+
 
 
     },
@@ -95,7 +66,6 @@ export const updateFormSlice = createSlice({
 
 })
 
-// export const {updateForm,restartForm,setError,clearError} = formSlice.actions;
 
 export default updateFormSlice.reducer
 
