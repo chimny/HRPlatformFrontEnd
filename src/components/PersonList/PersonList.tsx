@@ -14,9 +14,6 @@ import {getPeopleList, removePerson, removePersonFromState} from "../../redux/sl
 import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {PersonActions} from "./PersonActions";
-import Snackbar from "@mui/material/Snackbar";
-import {Alert} from "@mui/material";
-
 
 
 

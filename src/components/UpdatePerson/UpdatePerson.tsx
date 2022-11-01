@@ -1,20 +1,55 @@
-import React, {useState} from 'react';
-import {useFormik, Field, FormikProvider} from 'formik';
-
-import {TextField, Button, Alert, Container} from '@mui/material';
-import {FormikSelect} from './FormikSelect';
-
-import './FormikField.css'
+import {useEffect, useState} from "react";
 import {positionObj} from "../../data/positionList";
-import Snackbar from "@mui/material/Snackbar";
+import {FormikProvider, useFormik} from "formik";
 import {SeverityStatus} from "../Form/interface/severityStatusInterface";
 import {Spinner} from "../Spinner/Spinner";
-import { validationSchema } from './validationSchema';
-import { FormValues } from './interface/formValues';
+import {FormikSelect} from "../Formik/FormikSelect";
+import {validationSchema} from "../Formik/validationSchema";
+import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
+import {FormValues} from "../Formik/interface/formValues";
+import {useParams} from "react-router";
+
+
+export const UpdatePerson = () => {
+
+
+    const {personID} = useParams();
+
+    const [formState, setFormState] = useState<FormValues>({
+            name: '',
+            surname: '',
+            position: '',
+            salary: ''
+        }
+    )
+
+    let formLocalData= formState;
+
+
+    useEffect(() => {
+
+
+        const fetchData = async () => {
+            // get the data from the api
+            const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
+            // convert data to json
+            const json = await data.json();
+         const {chosenPersonData} = json;
+         const formData = {name:chosenPersonData.name, surname:chosenPersonData.surName, position:chosenPersonData.position, salary:chosenPersonData.salary};
+            formLocalData = formData
+        }
+
+        // call the function
+ fetchData()
+            // make sure to catch any error
+            .catch(console.error);
 
 
 
-export const Formik = () => {
+
+
+    }, [])
+
 
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>({
@@ -36,16 +71,11 @@ export const Formik = () => {
     };
 
 
-    const initialValues: FormValues = {
-        name: '',
-        surname: '',
-        position: '',
-        salary: ''
-    }
+
 
 
     const formik = useFormik({
-        initialValues,
+        initialValues:formLocalData,
         validationSchema: validationSchema,
         onSubmit: async (values) => {
 
@@ -90,6 +120,8 @@ export const Formik = () => {
             <Spinner/>
         )
     }
+
+
 
 
     return (
@@ -161,6 +193,6 @@ export const Formik = () => {
 
         </ Container>
     );
-};
 
 
+}
