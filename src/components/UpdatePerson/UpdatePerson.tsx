@@ -6,14 +6,15 @@ import {Spinner} from "../Spinner/Spinner";
 import {FormikSelect} from "../Formik/FormikSelect";
 import {validationSchema} from "../Formik/validationSchema";
 import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
+import {Link} from "react-router-dom";
 
 
 
 export const UpdatePerson = () => {
 
     const {personID} = useParams();
-
+    const navigate = useNavigate();
 
     const initialValues = {
         name: '',
@@ -49,10 +50,12 @@ export const UpdatePerson = () => {
         initialValues:initialValues,
         validationSchema: validationSchema,
         onSubmit: async (values) => {
+const {name,surname,position,salary} = formik.values
+
 
             try {
-                await fetch(`http://localhost:3001/addPerson`, {
-                    method: 'POST',
+                await fetch(`http://localhost:3001/personList/updatePerson/${personID}/${name}/${surname}/${position}/${salary}`, {
+                    method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -61,7 +64,7 @@ export const UpdatePerson = () => {
 
 
                 setSeverityStatus({status: 'success', message: 'data has been sent'})
-                formik.resetForm();
+                // formik.resetForm();
 
 
             } catch (e) {
@@ -74,7 +77,7 @@ export const UpdatePerson = () => {
                 console.log('done')
                 handleClick();
                 setLoading(false);
-
+                navigate('/')
             }
 
 
@@ -93,12 +96,12 @@ export const UpdatePerson = () => {
                 const {chosenPersonData} = json;
 
                 //@todo below is the problem!
-                // await formik.setValues({
-                //     name: chosenPersonData.name,
-                //     position: chosenPersonData.position,
-                //     salary: chosenPersonData.salary,
-                //     surname: chosenPersonData.surName
-                // })
+                await formik.setValues({
+                    name: chosenPersonData.name,
+                    position: chosenPersonData.position,
+                    salary: chosenPersonData.salary,
+                    surname: chosenPersonData.surName
+                })
             }
 
             // call the function
@@ -106,10 +109,9 @@ export const UpdatePerson = () => {
                 // make sure to catch any error
 
                 .catch(console.error);
-console.log(formik)
             setLoading(false);
 
-        },[formik,personID]
+        },[]
     )
 
 
