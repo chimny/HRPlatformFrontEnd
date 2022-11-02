@@ -1,1 +1,0 @@
-export type availableLabels = 'name' | 'surname' | 'position' | 'salary';

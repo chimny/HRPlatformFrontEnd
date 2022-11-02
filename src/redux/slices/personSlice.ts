@@ -31,21 +31,10 @@ export const personSlice = createSlice({
         removePersonFromState: (state: UsersState, {payload}): UsersState => {
             const {id} = payload;
             const filteredPersonList = state.receivedData.personPositionData.filter(el => el.personId !== id);
-            console.log(id);
-            console.log(filteredPersonList)
             return {...state, receivedData: {personPositionData: filteredPersonList}}
         },
 
 
-        updatePerson: (state: UsersState, {payload}) => {
-            const {id, name, surName, position, salary} = payload;
-
-            state.receivedData.personPositionData = state.receivedData.personPositionData.map(el => el.personId !== id ? el : {
-                ...el,
-                name,
-                surName, position, salary
-            });
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(getPeopleList.pending, (state) => {
@@ -62,9 +51,8 @@ export const personSlice = createSlice({
     },
 })
 
-export const {removePersonFromState, updatePerson} = personSlice.actions;
+export const {removePersonFromState} = personSlice.actions;
 
-// export const {updatePerson} = personSlice.actions;
 
 
 export default personSlice.reducer

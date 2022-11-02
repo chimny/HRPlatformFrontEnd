@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useFormik, Field, FormikProvider} from 'formik';
+import {useFormik, FormikProvider} from 'formik';
 
 import {TextField, Button, Alert, Container} from '@mui/material';
 import {FormikSelect} from './FormikSelect';
@@ -23,6 +23,8 @@ export const Formik = () => {
     });
     const [loading, setLoading] = useState<boolean>(false);
 
+    //@todo example of regex
+    // const regName = /^[a-zA-Z ]+$/;
 
     const handleClick = () => {
         setOpen(true);
@@ -54,7 +56,7 @@ export const Formik = () => {
 
 
             try {
-                const res = await fetch(`http://localhost:3001/addPerson`, {
+               await fetch(`http://localhost:3001/addPerson`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
