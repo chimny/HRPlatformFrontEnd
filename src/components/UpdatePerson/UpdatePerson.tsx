@@ -7,8 +7,7 @@ import {FormikSelect} from "../Formik/FormikSelect";
 import {validationSchema} from "../Formik/validationSchema";
 import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
 import {useNavigate, useParams} from "react-router";
-
-
+import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 
 
 export const UpdatePerson = () => {
@@ -45,12 +44,11 @@ export const UpdatePerson = () => {
     };
 
 
-
     const formik = useFormik({
-        initialValues:initialValues,
+        initialValues: initialValues,
         validationSchema: validationSchema,
         onSubmit: async (values) => {
-const {name,surname,position,salary} = formik.values
+            const {name, surname, position, salary} = formik.values
 
 
             try {
@@ -77,7 +75,8 @@ const {name,surname,position,salary} = formik.values
                 console.log('done')
                 handleClick();
                 setLoading(false);
-                navigate('/')
+                //@set here new linking!
+                // navigate('/')
             }
 
 
@@ -85,37 +84,37 @@ const {name,surname,position,salary} = formik.values
     });
 
 
+    //@todo review this below, na razie pusta tablica
+    const fetchData = async () => {
+
+        try{  const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
+            const json = await data.json();
+            const {chosenPersonData} = json;
+
+           return  await formik.setValues({
+                name: chosenPersonData.name,
+                position: chosenPersonData.position,
+                salary: chosenPersonData.salary,
+                surname: chosenPersonData.surName
+            })}
+
+        catch (e){
+            return (<ErrorComponent/>)
+        }
+
+
+
+
+    }
+
+  
+
     useEffect(() => {
-
-
-            const fetchData = async () => {
-                // get the data from the api
-                const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
-                // convert data to json
-                const json = await data.json();
-                const {chosenPersonData} = json;
-
-                //@todo below is the problem!
-                await formik.setValues({
-                    name: chosenPersonData.name,
-                    position: chosenPersonData.position,
-                    salary: chosenPersonData.salary,
-                    surname: chosenPersonData.surName
-                })
-            }
-
-            // call the function
-            fetchData()
-                // make sure to catch any error
-
+        fetchData()
                 .catch(console.error);
-            setLoading(false);
-
-        },[]
+        setLoading(false)
+        }, []
     )
-
-
-
 
 
 
@@ -124,8 +123,6 @@ const {name,surname,position,salary} = formik.values
             <Spinner/>
         )
     }
-
-
 
 
     return (
