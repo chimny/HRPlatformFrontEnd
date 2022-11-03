@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useMemo, useState} from "react";
 import {positionObj} from "../../data/positionList";
 import {FormikProvider, useFormik} from "formik";
 import {SeverityStatus} from "../Form/interface/severityStatusInterface";
@@ -8,7 +8,7 @@ import {validationSchema} from "../Formik/validationSchema";
 import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
 import {useNavigate, useParams} from "react-router";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
-
+import {Link} from "react-router-dom";
 
 export const UpdatePerson = () => {
 
@@ -30,7 +30,7 @@ export const UpdatePerson = () => {
     });
 
     const [loading, setLoading] = useState<boolean>(true);
-
+    const [formUpdated, setFormUpdated] = useState<boolean>(false)
 
     const handleClick = () => {
         setOpen(true);
@@ -84,38 +84,38 @@ export const UpdatePerson = () => {
     });
 
 
-    //@todo review this below, na razie pusta tablica
     const fetchData = async () => {
 
-        try{  const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
+        try {
+            const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
             const json = await data.json();
             const {chosenPersonData} = json;
 
-           return  await formik.setValues({
+            return await formik.setValues({
                 name: chosenPersonData.name,
                 position: chosenPersonData.position,
                 salary: chosenPersonData.salary,
                 surname: chosenPersonData.surName
-            })}
-
-        catch (e){
+            })
+        } catch (e) {
             return (<ErrorComponent/>)
         }
-
-
-
-
     }
 
-  
 
     useEffect(() => {
-        fetchData()
+            setLoading(false)
+            fetchData()
                 .catch(console.error);
-        setLoading(false)
+            console.log('haha')
         }, []
     )
 
+    useEffect(() => {
+            setFormUpdated(formik.values === initialValues);
+            console.log('haha')
+        }
+        , [formik.values])
 
 
     if (loading) {
@@ -177,9 +177,15 @@ export const UpdatePerson = () => {
                                   error={Boolean(formik.touched.position && Boolean(formik.errors.position))}/>
 
 
-                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit">
+                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit"
+                                                          disabled={formUpdated}>
                         Submit
-                    </Button></div>
+                    </Button>
+
+                        <Link to="/personList"> <Button color="primary" variant="contained">
+                            Go back
+                        </Button></Link>
+                    </div>
 
                 </form>
             </FormikProvider>
