@@ -14,14 +14,8 @@ export const UpdatePerson = () => {
 
     const {personID} = useParams();
     const navigate = useNavigate();
-
-    const initialValues = {
-        name: '',
-        surname: '',
-        position: '',
-        salary: ''
-    };
-
+//    @todo otypoawć zgodnie z backednem
+let fetchedData : any;
 
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>({
@@ -45,8 +39,14 @@ export const UpdatePerson = () => {
 
 
     const formik = useFormik({
-        initialValues: initialValues,
+        initialValues: {
+            name: '',
+            surname: '',
+            position: '',
+            salary: ''
+        },
         validationSchema: validationSchema,
+        enableReinitialize:true,
         onSubmit: async (values) => {
             const {name, surname, position, salary} = formik.values
 
@@ -90,13 +90,14 @@ export const UpdatePerson = () => {
             const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
             const json = await data.json();
             const {chosenPersonData} = json;
-
-            return await formik.setValues({
+            fetchedData = {
                 name: chosenPersonData.name,
                 position: chosenPersonData.position,
                 salary: chosenPersonData.salary,
                 surname: chosenPersonData.surName
-            })
+            }
+             await formik.setValues({...fetchedData});
+            return setLoading(false);
         } catch (e) {
             return (<ErrorComponent/>)
         }
@@ -104,18 +105,16 @@ export const UpdatePerson = () => {
 
 
     useEffect(() => {
-            setLoading(false)
             fetchData()
                 .catch(console.error);
-            console.log('haha')
+            console.log('render once')
         }, []
     )
 
-    useEffect(() => {
-            setFormUpdated(formik.values === initialValues);
-            console.log('haha')
-        }
-        , [formik.values])
+
+
+    //@todo show data if they're filled, submit button if initial state has changed
+
 
 
     if (loading) {
@@ -123,6 +122,7 @@ export const UpdatePerson = () => {
             <Spinner/>
         )
     }
+
 
 
     return (
@@ -178,7 +178,7 @@ export const UpdatePerson = () => {
 
 
                     <div className='StyledButton'><Button color="primary" variant="contained" type="submit"
-                                                          disabled={formUpdated}>
+                                                          disabled={formik.dirty}>
                         Submit
                     </Button>
 
