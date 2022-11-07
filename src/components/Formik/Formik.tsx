@@ -75,11 +75,8 @@ export const Formik = () => {
                     message: `unexpected error occurred ${e}`
                 })
             } finally {
-
-                console.log('done')
                 handleClick();
                 setLoading(false);
-
             }
 
 
@@ -146,7 +143,7 @@ export const Formik = () => {
                                   error={Boolean(formik.touched.position && Boolean(formik.errors.position))}/>
 
 
-                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit">
+                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit" disabled={!Boolean(formik.dirty)}>
                         Submit
                     </Button></div>
 
