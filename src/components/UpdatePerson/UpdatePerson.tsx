@@ -5,6 +5,7 @@ import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
 import {useParams} from "react-router";
 import {FormikUpdate} from "./FormikUpdate";
 import {FormValues} from "../Formik/interface/formValues";
+import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const UpdatePerson = () => {
 
@@ -30,8 +31,8 @@ export const UpdatePerson = () => {
             })
             console.log('render')
         } catch (e) {
-            // return (<ErrorComponent/>)
             console.log(e)
+            return (<ErrorComponent/>)
         }
     }
 

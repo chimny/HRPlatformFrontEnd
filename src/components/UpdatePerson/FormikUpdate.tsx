@@ -2,7 +2,7 @@ import {FormikProvider, useFormik} from "formik";
 import {Button, TextField} from "@mui/material";
 import {FormikSelect} from "../Formik/FormikSelect";
 import {positionObj} from "../../data/positionList";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {validationSchema} from "../Formik/validationSchema";
 
@@ -14,6 +14,8 @@ interface Props {
 
 export const FormikUpdate  = (props:Props)=>{
     const {initValues,personID} = props;
+
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: initValues,
@@ -32,11 +34,11 @@ export const FormikUpdate  = (props:Props)=>{
                     body: JSON.stringify(values),
                 });
 
-
+                navigate('/success')
 
 
             } catch (e) {
-              console.error(`unexpected error occured: ${e} `)
+              console.error(`unexpected error occurred: ${e} `)
             } finally {
 
                 console.log('done')

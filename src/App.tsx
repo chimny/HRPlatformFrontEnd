@@ -15,6 +15,8 @@ import {PersonList} from "./components/PersonList/PersonList";
 import {Formik} from "./components/Formik/Formik";
 import {AddPerson} from "./components/AddPerson/AddPerson";
 import {UpdatePerson} from "./components/UpdatePerson/UpdatePerson";
+import { SuccessComponent } from './components/SuccesComponent/SuccesComponent';
+
 
 
 
@@ -33,6 +35,7 @@ function App() {
               <Route path='/addPerson' element={<AddPerson/>}/>
               <Route path='/position-list' element={<PositionList/>}/>
               <Route path='/salary-data' element={<SalaryData/>}/>
+              <Route path='/success' element={<SuccessComponent/>}/>
           </Routes>
       </BrowserRouter>
 
