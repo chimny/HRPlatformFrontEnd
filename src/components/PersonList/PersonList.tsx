@@ -14,6 +14,8 @@ import {getPeopleList, removePerson, removePersonFromState} from "../../redux/sl
 import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {PersonActions} from "./PersonActions";
+import Dialog from '@mui/material/Dialog';
+import {Button, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 
 
 
@@ -24,9 +26,24 @@ export const PersonList = () => {
     const resStatus = useSelector((state: PersonStoreInterface) => state.personList.status)
     const dispatch = useDispatch<AppDispatch>();
 
+    const [open, setOpen] = React.useState(false);
 
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
+    //@todo trigger alert
 
     const deleteHandler = useCallback((id: string) => {
+       if( handleClickOpen() ){
+           return
+
+       }
         dispatch(removePerson(id));
         dispatch(removePersonFromState({id}))
     }, [dispatch])
@@ -49,7 +66,31 @@ export const PersonList = () => {
 
 
     //table data below
-    return (
+    return (<>
+
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Use Google's location service?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Let Google help apps determine location. This means sending anonymous
+                        location data to Google, even when no apps are running.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Disagree</Button>
+                    <Button onClick={handleClose} autoFocus>
+                        Agree
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
         <TableContainer component={Paper}>
             <Table sx={{minWidth: 650}} aria-label="simple table">
                 <TableHead>
@@ -85,5 +126,6 @@ export const PersonList = () => {
 
 
         </TableContainer>
+        </>
     );
 }
