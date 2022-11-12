@@ -5,15 +5,16 @@ import {positionObj} from "../../data/positionList";
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {validationSchema} from "../Formik/validationSchema";
+import {SuccessComponent} from "../SuccesComponent/SuccesComponent";
 
 
 interface Props {
-    initValues:any;
+    initValues: any;
     personID: string;
 }
 
-export const FormikUpdate  = (props:Props)=>{
-    const {initValues,personID} = props;
+export const FormikUpdate = (props: Props) => {
+    const {initValues, personID} = props;
 
     const navigate = useNavigate();
 
@@ -34,11 +35,12 @@ export const FormikUpdate  = (props:Props)=>{
                     body: JSON.stringify(values),
                 });
 
-                navigate('/success')
+                //@todo update section to pass person ID in success component
+                navigate(`/success/${personID}`)
 
 
             } catch (e) {
-              console.error(`unexpected error occurred: ${e} `)
+                console.error(`unexpected error occurred: ${e} `)
             } finally {
 
                 console.log('done')
@@ -51,8 +53,7 @@ export const FormikUpdate  = (props:Props)=>{
     });
 
 
-
-    return(
+    return (
         <FormikProvider value={formik}>
             <form onSubmit={formik.handleSubmit}>
                 <div className='FormikField'><TextField
@@ -106,8 +107,8 @@ export const FormikUpdate  = (props:Props)=>{
                     Submit
                 </Button>
 
-                    <Link to="/personList"> <Button color="primary" variant="contained">
-                        Go back
+                    <Link to="/personList"> <Button color="secondary" variant="outlined">
+                        Back to person list
                     </Button></Link>
                 </div>
 

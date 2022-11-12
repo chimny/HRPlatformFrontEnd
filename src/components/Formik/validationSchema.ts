@@ -1,15 +1,20 @@
 import * as yup from "yup";
 
+
+const regexpString = /^[a-zA-ZäöüßÄÖÜąĄćĆżŻŁłźŹ]+$/;
+
 export const validationSchema = yup.object({
     name: yup
         .string()
         .min(3, 'Name should include at least 3 signs!')
         .max(50, 'Name length is maximum 50')
+        .matches(regexpString,'Please use only letters')
         .required('name is required'),
     surname: yup
         .string()
         .min(3, 'surname should include at least 3 signs!')
         .max(50, 'surname length is maximum 50')
+        .matches(regexpString,'Please use only letters')
         .required('surname is required'),
     salary: yup
         .number()

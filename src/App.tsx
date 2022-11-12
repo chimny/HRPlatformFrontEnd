@@ -35,7 +35,7 @@ function App() {
               <Route path='/addPerson' element={<AddPerson/>}/>
               <Route path='/position-list' element={<PositionList/>}/>
               <Route path='/salary-data' element={<SalaryData/>}/>
-              <Route path='/success' element={<SuccessComponent/>}/>
+              <Route path='/success/:personID' element={<SuccessComponent/>}/>
           </Routes>
       </BrowserRouter>
 
