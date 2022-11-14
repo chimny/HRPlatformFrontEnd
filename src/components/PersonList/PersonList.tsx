@@ -40,12 +40,9 @@ export const PersonList = () => {
     //@todo trigger alert
 
     const deleteHandler = useCallback((id: string) => {
-       if( handleClickOpen() ){
-           return
-
-       }
-        dispatch(removePerson(id));
-        dispatch(removePersonFromState({id}))
+        handleClickOpen()
+        // dispatch(removePerson(id));
+        // dispatch(removePersonFromState({id}))
     }, [dispatch])
 
 
@@ -75,18 +72,17 @@ export const PersonList = () => {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Use Google's location service?"}
+                    {"Heads up!"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Let Google help apps determine location. This means sending anonymous
-                        location data to Google, even when no apps are running.
+                        Are you sure you want to delete person?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Disagree</Button>
+                    <Button onClick={handleClose}>Cancel</Button>
                     <Button onClick={handleClose} autoFocus>
-                        Agree
+                        Delete
                     </Button>
                 </DialogActions>
             </Dialog>
