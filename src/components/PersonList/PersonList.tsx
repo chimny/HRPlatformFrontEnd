@@ -18,7 +18,6 @@ import Dialog from '@mui/material/Dialog';
 import {Button, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 
 
-
 export const PersonList = () => {
 
 
@@ -27,6 +26,16 @@ export const PersonList = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const [open, setOpen] = React.useState(false);
+const [personId, setPersonId] = useState<string>(" ");
+    /*
+    * step 1
+    * set hook fo actve d
+    * step 2
+    *
+    * set edx delete handle n navgaton form in onclick iii1111
+    *
+    * */
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -40,10 +49,16 @@ export const PersonList = () => {
     //@todo trigger alert
 
     const deleteHandler = useCallback((id: string) => {
-        handleClickOpen()
-        // dispatch(removePerson(id));
-        // dispatch(removePersonFromState({id}))
-    }, [dispatch])
+        handleClickOpen();
+        setPersonId(id);
+    }, [dispatch]);
+
+    const deletePersonHandler = ()=>{
+        dispatch(removePerson(personId));
+        dispatch(removePersonFromState(personId));
+        dispatch(getPeopleList());
+        handleClose()
+    }
 
 
     useEffect(() => {
@@ -81,47 +96,46 @@ export const PersonList = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose} autoFocus>
+                    <Button onClick={deletePersonHandler} autoFocus>
                         Delete
                     </Button>
                 </DialogActions>
             </Dialog>
 
-        <TableContainer component={Paper}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Surname</TableCell>
-                        <TableCell align="right">Position</TableCell>
-                        <TableCell align="right">Salary</TableCell>
-                        <TableCell align="right">Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {listedPersons.map((person) => (
-                        <TableRow
-                            key={person.personId}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                        >
-                            <TableCell component="th" scope="row">
-                                {person.name}
-                            </TableCell>
-                            <TableCell align="right">{person.surName}</TableCell>
-                            <TableCell align="right">{person.position}</TableCell>
-                            <TableCell align="right">{person.salary}</TableCell>
-                            <TableCell align="right"><PersonActions personId={person.personId}
-                                                                    onDelete={() => deleteHandler(person.personId as string)}/></TableCell>
+            <TableContainer component={Paper}>
+                <Table sx={{minWidth: 650}} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="right">Surname</TableCell>
+                            <TableCell align="right">Position</TableCell>
+                            <TableCell align="right">Salary</TableCell>
+                            <TableCell align="right">Actions</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHead>
+                    <TableBody>
+                        {listedPersons.map((person) => (
+                            <TableRow
+                                key={person.personId}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {person.name}
+                                </TableCell>
+                                <TableCell align="right">{person.surName}</TableCell>
+                                <TableCell align="right">{person.position}</TableCell>
+                                <TableCell align="right">{person.salary}</TableCell>
+                                <TableCell align="right">
+                                    <PersonActions personId={person.personId}
+                                                   onDelete={() => deleteHandler(person.personId as string)}/>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
 
 
-
-
-
-        </TableContainer>
+            </TableContainer>
         </>
     );
 }
