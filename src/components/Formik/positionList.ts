@@ -1,6 +1,4 @@
-import {PositionList} from "../../../backend/types/personPosition";
-import {FormikSelectItem} from "../components/Formik/FormikSelect";
-
+import {PositionList} from "../../../../backend/types/personPosition";
 
 interface positionObj{
     label: PositionList,
@@ -26,5 +24,3 @@ export const positionObj:positionObj[] = [{
     label:'Manager',
     value:'Manager',
 }];
-
-export const positionList: PositionList[] = ['Trainee', 'Assistant', 'Junior Specialist', 'Specialist', 'Senior Specialist', 'Manager']

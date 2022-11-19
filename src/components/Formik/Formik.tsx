@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import {useFormik, FormikProvider} from 'formik';
 
-import {TextField, Button, Alert, Container} from '@mui/material';
+import {useFormik, FormikProvider} from 'formik';
 import {FormikSelect} from './FormikSelect';
+import { validationSchema } from './validationSchema';
+
+import {TextField, Button, Alert, Container, Snackbar} from '@mui/material';
+
+import {Spinner} from "../Spinner/Spinner";
+import {positionObj} from "./positionList";
+import {SeverityStatus} from "./interface/severityStatusInterface";
+import { formValues } from './interface/formValues';
 
 import './FormikField.css'
-import {positionObj} from "../../data/positionList";
-import Snackbar from "@mui/material/Snackbar";
-import {SeverityStatus} from "../Form/interface/severityStatusInterface";
-import {Spinner} from "../Spinner/Spinner";
-import { validationSchema } from './validationSchema';
-import { FormValues } from './interface/formValues';
-
 
 
 export const Formik = () => {
@@ -23,22 +23,18 @@ export const Formik = () => {
     });
     const [loading, setLoading] = useState<boolean>(false);
 
-    //@todo example of regex
-    // const regName = /^[a-zA-Z ]+$/;
 
-    const handleClick = () => {
+    const handleClick  = ():void => {
         setOpen(true);
     };
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string): void => {
+        if (reason === 'clickaway') return;
         setOpen(false);
     };
 
 
-    const initialValues: FormValues = {
+    const initialValues: formValues = {
         name: '',
         surname: '',
         position: '',
@@ -48,12 +44,9 @@ export const Formik = () => {
 
     const formik = useFormik({
         initialValues,
-        validationSchema: validationSchema,
-        onSubmit: async (values) => {
-
-
+        validationSchema,
+        onSubmit: async (values):Promise<void> => {
             setLoading(true);
-
 
             try {
                await fetch(`http://localhost:3001/addPerson`, {
@@ -64,10 +57,8 @@ export const Formik = () => {
                     body: JSON.stringify(values),
                 });
 
-
                 setSeverityStatus({status: 'success', message: 'data has been sent'})
                 formik.resetForm();
-
 
             } catch (e) {
                 setSeverityStatus({
@@ -78,8 +69,6 @@ export const Formik = () => {
                 handleClick();
                 setLoading(false);
             }
-
-
         },
     });
 

@@ -20,21 +20,12 @@ import {Button, DialogActions, DialogContent, DialogContentText, DialogTitle} fr
 
 export const PersonList = () => {
 
-
     const listedPersons = useSelector((state: PersonStoreInterface) => state.personList.receivedData.personPositionData)
     const resStatus = useSelector((state: PersonStoreInterface) => state.personList.status)
     const dispatch = useDispatch<AppDispatch>();
 
     const [open, setOpen] = React.useState(false);
-const [personId, setPersonId] = useState<string>(" ");
-    /*
-    * step 1
-    * set hook fo actve d
-    * step 2
-    *
-    * set edx delete handle n navgaton form in onclick iii1111
-    *
-    * */
+    const [personId, setPersonId] = useState<string>(" ");
 
 
     const handleClickOpen = () => {
@@ -46,14 +37,12 @@ const [personId, setPersonId] = useState<string>(" ");
     };
 
 
-    //@todo trigger alert
-
     const deleteHandler = useCallback((id: string) => {
         handleClickOpen();
         setPersonId(id);
     }, [dispatch]);
 
-    const deletePersonHandler = ()=>{
+    const deletePersonHandler = () => {
         dispatch(removePerson(personId));
         dispatch(removePersonFromState(personId));
         dispatch(getPeopleList());

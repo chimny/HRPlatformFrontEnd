@@ -5,26 +5,16 @@ import {
     Route,
 } from "react-router-dom";
 import { Home } from './components/Home/Home';
-
-
 import { PositionList } from './components/Position/PositionList';
 import { SalaryData } from './components/Salary/SalaryData';
 import {Navigation} from "./components/Navigation/Navigation";
 import {PersonList} from "./components/PersonList/PersonList";
-
-import {Formik} from "./components/Formik/Formik";
 import {AddPerson} from "./components/AddPerson/AddPerson";
 import {UpdatePerson} from "./components/UpdatePerson/UpdatePerson";
 import { SuccessComponent } from './components/SuccesComponent/SuccesComponent';
 
 
-
-
-
-
 function App() {
-
-
   return (
       <BrowserRouter>
           <Navigation/>
@@ -38,7 +28,6 @@ function App() {
               <Route path='/success/:personID' element={<SuccessComponent/>}/>
           </Routes>
       </BrowserRouter>
-
   );
 }
 

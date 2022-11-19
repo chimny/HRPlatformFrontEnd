@@ -4,7 +4,7 @@ import {Spinner} from "../Spinner/Spinner";
 import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
 import {useParams} from "react-router";
 import {FormikUpdate} from "./FormikUpdate";
-import {FormValues} from "../Formik/interface/formValues";
+import {formValues} from "../Formik/interface/formValues";
 import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
 
 export const UpdatePerson = () => {
@@ -13,7 +13,7 @@ export const UpdatePerson = () => {
 
 
     const [loading, setLoading] = useState<boolean>(true);
-    const [initValues, setInitValues] = useState<FormValues>({name: '', surname: '', salary: '', position: ''})
+    const [initValues, setInitValues] = useState<formValues>({name: '', surname: '', salary: '', position: ''})
 
 
     const fetchData = async () => {

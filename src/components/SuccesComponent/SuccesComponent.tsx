@@ -21,7 +21,6 @@ export const SuccessComponent = () => {
 
                 <Link to={`/personList/chosenPerson/${personID}`}><Button color="secondary" variant='outlined'
                                                                           sx={{}}>Edit again</Button></Link>
-
                 <Link to="/personList"> <Button color="primary" variant="contained">
                     Person list section
                 </Button></Link>

@@ -1,11 +1,10 @@
 import {FormikProvider, useFormik} from "formik";
 import {Button, TextField} from "@mui/material";
 import {FormikSelect} from "../Formik/FormikSelect";
-import {positionObj} from "../../data/positionList";
+import {positionObj} from "../Formik/positionList";
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {validationSchema} from "../Formik/validationSchema";
-import {SuccessComponent} from "../SuccesComponent/SuccesComponent";
 
 
 interface Props {
