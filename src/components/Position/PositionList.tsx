@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {StyledCenteredDiv} from "../../Utils/Components/StyledCenteredDiv";
+import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 
 
 
@@ -42,12 +43,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export const PositionList = ()=>{
 
-    const [positionList,setPositionList] = useState<null | PositionDescriptionEntity[] >(null);
+    const [positionList,setPositionList] = useState<null | PositionDescriptionEntity[] | 'error' >(null);
 
     const receiveHandler = async ()=>{
+        try{
         const jsonData =  await fetch('http://localhost:3001/positions');
         const data = await jsonData.json()
-        setPositionList(data.positions)
+            console.log(data);
+        setPositionList(data)}
+
+        catch(e){
+            console.error(`unexpected error occured: ${e}`)
+            setPositionList('error');
+        }
+
     }
 
 
@@ -61,27 +70,31 @@ export const PositionList = ()=>{
         return <Spinner/>
     }
 
+    if(positionList === 'error'){
+        return <ErrorComponent/>
+    }
+
 
     return (
-        <TableContainer component={Paper} sx={{ margin: '16px auto',width: 1/2 }}>
-            <Table sx={{minWidth: 650}} aria-label="simple table">
-                <TableHead>
+        <TableContainer component={Paper} sx={{ margin: '16px auto',minWidth: 650 }}>
+            <Table sx={{minWidth: 650}} >
+                <TableHead >
                     <TableRow>
-                         <StyledTableCell align="center"> Position</StyledTableCell>
-                        <StyledTableCell align="center">Description</StyledTableCell>
+                         <TableCell align="center" sx={{borderBottom: 1,fontSize:32}}> Position</TableCell>
+                        <TableCell align="center" sx={{borderBottom: 1,fontSize:32}}>Description</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {positionList.map((position) => (
-                        <StyledTableRow
+                        <TableRow
                             key={position.position}
-                            sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                            // sx={{'&:nth-child(even) td': {backgroundColor: 'lightgray'}}}
                         >
-                            <TableCell component="th" scope="row" align="center">
+                            <TableCell component="th" scope="row" align="center"  sx={{borderRight: 1,width:1/2,}}>
                                 {position.position}
                             </TableCell>
                             <TableCell align="center">{position.description}</TableCell>
-                        </StyledTableRow>
+                        </TableRow>
                     ))}
                 </TableBody>
             </Table>
