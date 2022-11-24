@@ -1,8 +1,12 @@
 import * as React from 'react';
 import styled from '@mui/system/styled';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/system/Unstable_Grid';
-import Box from '@mui/system/Box';
+import GroupsIcon from '@mui/icons-material/Groups';
+import {StyledCenteredDiv} from "../../Utils/Components/StyledCenteredDiv";
+import {StyledHome, StyledHomeChild} from "./StyledHome";
+import {StyledButtonWrapper} from "../SuccesComponent/StyledButtonWrapper";
+import {Link} from "react-router-dom";
+import {Button} from "@mui/material";
 
 const DivFlexBox = styled('div')(({theme}) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -27,13 +31,14 @@ const DivFlexBoxChild = styled('div')(({theme}) => ({
 export const Home = () => {
 
     return (
-        <DivFlexBox>
-            <div>some cool picture</div>
-            <DivFlexBoxChild>
+        <StyledHome>
+
+            <StyledHomeChild><GroupsIcon sx={{width:'100px'}}/></StyledHomeChild>
+            <StyledHomeChild>
                 <Typography variant="h4" gutterBottom>
                     Welcome to the HR platform
                 </Typography>
-                <Typography variant="subtitle2" gutterBottom>
+                <Typography variant="subtitle2" fontSize={'16px'} gutterBottom>
                     Place where you can track your company employees
                 </Typography>
                 <Typography variant="body2" gutterBottom>
@@ -43,10 +48,19 @@ export const Home = () => {
                     proper access can reach it!
                     Looking forward to check it?
                     Don't hesitate, try it now!
-                {/*    @todo add redirect to person list button, plus add new employess*/}
+                    {/*    @todo add redirect to person list button, plus add new employess*/}
                 </Typography>
-            </DivFlexBoxChild>
-        </DivFlexBox>
+                <StyledButtonWrapper>
+
+
+                    <Link to={`/personList`}><Button color="secondary" variant='outlined'
+                                                                              sx={{}}>Go to person list</Button></Link>
+                    <Link to="/addPerson"> <Button color="primary" variant="contained">
+                        Add new person
+                    </Button></Link>
+                </StyledButtonWrapper>
+            </StyledHomeChild>
+        </StyledHome>
     );
 
 }
