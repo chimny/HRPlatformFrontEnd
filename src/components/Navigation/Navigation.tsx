@@ -114,7 +114,7 @@ export const Navigation = () => {
                             {pagesUpdate.map(({name, path}) => (
                                 <MenuItem key={name} onClick={handleCloseNavMenu}   >
                                     <Link  to={path}  className={'menuLinkMobile'}
-                                    > <Typography textAlign="center">
+                                    > <Typography textAlign="center" >
                                         {name}
                                     </Typography></Link>
                                 </MenuItem>
