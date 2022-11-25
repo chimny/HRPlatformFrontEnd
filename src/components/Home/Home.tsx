@@ -6,35 +6,15 @@ import {StyledCenteredDiv} from "../../Utils/Components/StyledCenteredDiv";
 import {StyledHome, StyledHomeChild} from "./StyledHome";
 import {StyledButtonWrapper} from "../SuccesComponent/StyledButtonWrapper";
 import {Link} from "react-router-dom";
-import {Button} from "@mui/material";
+import { Button, Container, Snackbar} from '@mui/material';
 
-const DivFlexBox = styled('div')(({theme}) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    border: '1px solid',
-    borderColor: theme.palette.mode === 'dark' ? '#444d58' : '#ced7e0',
-    padding: theme.spacing(1),
-    borderRadius: '4px',
-    textAlign: 'center',
-    fontSize: '20px',
-    display: 'flex',
-    width: '100%',
-    height: '80vh',
-    justifyContent: 'space-around',
-    alignItems: 'center'
-}));
-
-const DivFlexBoxChild = styled('div')(({theme}) => ({
-    width: '50%'
-}));
 
 
 export const Home = () => {
 
     return (
-        <StyledHome>
-
-            <StyledHomeChild><GroupsIcon sx={{width:'100px'}}/></StyledHomeChild>
-            <StyledHomeChild>
+        <Container
+            maxWidth="md" sx={{padding: '20px 0',margin:'20px auto',height:'80vh', textAlign:'center', display:'flex',justifyContent:'center',flexDirection:'column'}}>
                 <Typography variant="h4" gutterBottom>
                     Welcome to the HR platform
                 </Typography>
@@ -53,14 +33,13 @@ export const Home = () => {
                 <StyledButtonWrapper>
 
 
-                    <Link to={`/personList`}><Button color="secondary" variant='outlined'
-                                                                              sx={{}}>Go to person list</Button></Link>
-                    <Link to="/addPerson"> <Button color="primary" variant="contained">
+                    <Link to={`/personList`}><Button color="primary" variant='contained'
+                                                     sx={{}}>Go to person list</Button></Link>
+                    <Link to="/addPerson"> <Button color="secondary" variant="outlined">
                         Add new person
                     </Button></Link>
                 </StyledButtonWrapper>
-            </StyledHomeChild>
-        </StyledHome>
+        </Container>
     );
 
 }

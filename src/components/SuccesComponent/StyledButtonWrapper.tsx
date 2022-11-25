@@ -7,4 +7,8 @@ export const StyledButtonWrapper  = styled.div`
   justify-content: space-around;
   margin-top: 18px;
   width: 100%;
+  
+  & a{
+    text-decoration: none;
+  }
 `
