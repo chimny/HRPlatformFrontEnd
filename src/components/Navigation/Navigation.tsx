@@ -18,27 +18,33 @@ import './navStyle.css';
 interface pageNavigation {
     name: string;
     path: string;
+    activeStatus:boolean
 }
 
 const pagesUpdate: pageNavigation[] = [{
     name: 'Home',
-    path: '/'
+    path: '/',
+    activeStatus:false
 },
     {
         name: 'Person List',
-        path: '/personList'
+        path: '/personList',
+        activeStatus:false
     },
     {
         name: 'Add person',
-        path: '/addPerson'
+        path: '/addPerson',
+        activeStatus:false
     },
     {
         name: 'Position List',
-        path: '/position-list'
+        path: '/position-list',
+        activeStatus:false
     },
     {
         name: 'Salary data',
-        path: '/salary-data'
+        path: '/salary-data',
+        activeStatus:true
     }
 ]
 
@@ -53,11 +59,24 @@ export const Navigation = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+    //    selected logic here
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+
+
+
+    const activeMenuItem = (index:number)=>{
+
+        //@todo implement logic of updating state below
+        console.log(`h : ${index}`)
+        handleCloseNavMenu()
+
+    }
+
+
 
     return (
         <AppBar position="static">
@@ -111,8 +130,11 @@ export const Navigation = () => {
                                 display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {pagesUpdate.map(({name, path}) => (
-                                <MenuItem key={name} onClick={handleCloseNavMenu}   >
+                            {pagesUpdate.map(({name, path,activeStatus},index) => (
+                                <MenuItem key={name}
+                                          onClick={()=>activeMenuItem(index)}
+                                          selected={activeStatus}
+                                >
                                     <Link  to={path}  className={'menuLinkMobile'}
                                     > <Typography textAlign="center" >
                                         {name}
@@ -140,18 +162,23 @@ export const Navigation = () => {
                     >
                         HRPlatform
                     </Typography>
-                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}} >
+                        <Menu>
                         {pagesUpdate.map(({
-                                              name, path
-                                          }) => (
-                            <Link className={'menuLink'} to={path}  key={name} >  <Button
+                                              name, path,activeStatus
+                                          },index) => (
+                                              <MenuItem   selected={activeStatus}>
+                                                  <Link className={'menuLink'} to={path}  key={name}   >  <Button
 
-                                onClick={handleCloseNavMenu}
-                                sx={{my: 2, color: 'white', display: 'block'}}
-                            >
-                                {name}
-                            </Button></Link>
+                                                      onClick={()=>activeMenuItem(index)}
+                                                      sx={{my: 2, color: 'white', display: 'block'}}
+                                                  >
+                                                      {name}
+                                                  </Button></Link>
+                                              </MenuItem>
+
                         ))}
+                        </Menu>
                     </Box>
 
                     <Box sx={{flexGrow: 0}}>
