@@ -163,7 +163,7 @@ export const Navigation = () => {
                         HRPlatform
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}} >
-                        <Menu>
+                        {/*<Menu>*/}
                         {pagesUpdate.map(({
                                               name, path,activeStatus
                                           },index) => (
@@ -178,7 +178,7 @@ export const Navigation = () => {
                                               </MenuItem>
 
                         ))}
-                        </Menu>
+                        {/*</Menu>*/}
                     </Box>
 
                     <Box sx={{flexGrow: 0}}>
