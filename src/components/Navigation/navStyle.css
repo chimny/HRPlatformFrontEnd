@@ -1,7 +1,6 @@
 
-
-.menuLink{
-    color:black;
+.menuLink {
+    color: black;
     text-decoration: none;
     letter-spacing: 0.5px;
     transition: 0.1s;
@@ -9,17 +8,18 @@
 }
 
 
-
-.menuLink:hover button{
-    font-weight: bold;
-   text-decoration: underline;
+a{
+    text-decoration: none;
 }
 
-.activeTab{
-    font-weight: bold;
+.activeOption {
+    border-bottom: white solid 1px;
+    background: #2196f3;
 }
 
-.menuLinkMobile{
+
+
+.menuLinkMobile {
     color: rgba(26, 24, 24, 0.85);
     text-decoration: none;
 }

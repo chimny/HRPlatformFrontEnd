@@ -24,7 +24,7 @@ interface pageNavigation {
 const pagesUpdate: pageNavigation[] = [{
     name: 'Home',
     path: '/',
-    activeStatus:false
+    activeStatus:true
 },
     {
         name: 'Person List',
@@ -44,13 +44,14 @@ const pagesUpdate: pageNavigation[] = [{
     {
         name: 'Salary data',
         path: '/salary-data',
-        activeStatus:true
+        activeStatus:false
     }
 ]
 
 export const Navigation = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const [nav,setNav] = useState(pagesUpdate);
 
     const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -68,10 +69,15 @@ export const Navigation = () => {
 
 
 
-    const activeMenuItem = (index:number)=>{
+    const activeMenuItem = (passedIndex:number)=>{
 
         //@todo implement logic of updating state below
-        console.log(`h : ${index}`)
+        setNav(prev=>{
+
+            return prev.map((el,index)=> index === passedIndex ? {...el,activeStatus:true }: {...el, activeStatus:false})
+
+
+        })
         handleCloseNavMenu()
 
     }
@@ -130,7 +136,7 @@ export const Navigation = () => {
                                 display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {pagesUpdate.map(({name, path,activeStatus},index) => (
+                            {nav.map(({name, path,activeStatus},index) => (
                                 <MenuItem key={name}
                                           onClick={()=>activeMenuItem(index)}
                                           selected={activeStatus}
@@ -163,22 +169,21 @@ export const Navigation = () => {
                         HRPlatform
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}} >
-                        {/*<Menu>*/}
-                        {pagesUpdate.map(({
+                        {nav.map(({
                                               name, path,activeStatus
                                           },index) => (
-                                              <MenuItem   selected={activeStatus}>
-                                                  <Link className={'menuLink'} to={path}  key={name}   >  <Button
+                                              <MenuItem   >
+                                                  <Link  to={path}  key={name}    className={activeStatus?'activeOption':''} >  <Button
 
                                                       onClick={()=>activeMenuItem(index)}
                                                       sx={{my: 2, color: 'white', display: 'block'}}
+
                                                   >
                                                       {name}
                                                   </Button></Link>
                                               </MenuItem>
 
                         ))}
-                        {/*</Menu>*/}
                     </Box>
 
                     <Box sx={{flexGrow: 0}}>
