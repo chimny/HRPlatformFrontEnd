@@ -92,8 +92,6 @@ export const Navigation = () => {
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
                         sx={{
                             mr: 2,
                             display: {xs: 'none', md: 'flex'},
@@ -102,6 +100,7 @@ export const Navigation = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            cursor:'default'
                         }}
                     >
                         HRPlatform
@@ -153,8 +152,6 @@ export const Navigation = () => {
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href=""
                         sx={{
                             mr: 2,
                             display: {xs: 'flex', md: 'none'},
@@ -164,6 +161,7 @@ export const Navigation = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
+                            cursor:'default'
                         }}
                     >
                         HRPlatform
