@@ -1,4 +1,4 @@
-import {useState,MouseEvent} from 'react';
+import {useState, MouseEvent} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,40 +18,40 @@ import './navStyle.css';
 interface pageNavigation {
     name: string;
     path: string;
-    activeStatus:boolean
+    activeStatus: boolean
 }
 
 const pagesUpdate: pageNavigation[] = [{
     name: 'Home',
     path: '/',
-    activeStatus:true
+    activeStatus: true
 },
     {
         name: 'Person List',
         path: '/personList',
-        activeStatus:false
+        activeStatus: false
     },
     {
         name: 'Add person',
         path: '/addPerson',
-        activeStatus:false
+        activeStatus: false
     },
     {
         name: 'Position List',
         path: '/position-list',
-        activeStatus:false
+        activeStatus: false
     },
     {
         name: 'Salary data',
         path: '/salary-data',
-        activeStatus:false
+        activeStatus: false
     }
 ]
 
 export const Navigation = () => {
     const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-    const [nav,setNav] = useState(pagesUpdate);
+    const [nav, setNav] = useState(pagesUpdate);
 
     const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -60,7 +60,7 @@ export const Navigation = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-    //    selected logic here
+        //    selected logic here
     };
 
     const handleCloseUserMenu = () => {
@@ -68,20 +68,21 @@ export const Navigation = () => {
     };
 
 
-
-    const activeMenuItem = (passedIndex:number)=>{
+    const activeMenuItem = (passedIndex: number) => {
 
         //@todo implement logic of updating state below
-        setNav(prev=>{
+        setNav(prev => {
 
-            return prev.map((el,index)=> index === passedIndex ? {...el,activeStatus:true }: {...el, activeStatus:false})
+            return prev.map((el, index) => index === passedIndex ? {...el, activeStatus: true} : {
+                ...el,
+                activeStatus: false
+            })
 
 
         })
         handleCloseNavMenu()
 
     }
-
 
 
     return (
@@ -100,7 +101,7 @@ export const Navigation = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            cursor:'default'
+                            cursor: 'default'
                         }}
                     >
                         HRPlatform
@@ -135,13 +136,13 @@ export const Navigation = () => {
                                 display: {xs: 'block', md: 'none'},
                             }}
                         >
-                            {nav.map(({name, path,activeStatus},index) => (
+                            {nav.map(({name, path, activeStatus}, index) => (
                                 <MenuItem key={name}
-                                          onClick={()=>activeMenuItem(index)}
+                                          onClick={() => activeMenuItem(index)}
                                           selected={activeStatus}
                                 >
-                                    <Link  to={path}  className={'menuLinkMobile'}
-                                    > <Typography textAlign="center" >
+                                    <Link to={path} className={'menuLinkMobile'}
+                                    > <Typography textAlign="center">
                                         {name}
                                     </Typography></Link>
                                 </MenuItem>
@@ -161,25 +162,25 @@ export const Navigation = () => {
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
-                            cursor:'default'
+                            cursor: 'default'
                         }}
                     >
                         HRPlatform
                     </Typography>
-                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}} >
+                    <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {nav.map(({
-                                              name, path,activeStatus
-                                          },index) => (
-                                              <MenuItem   >
-                                                  <Link  to={path}  key={name}    className={activeStatus?'activeOption':''} >  <Button
+                                      name, path, activeStatus
+                                  }, index) => (
+                            <MenuItem>
+                                <Link to={path} key={name} className={activeStatus ? 'activeOption' : ''}> <Button
 
-                                                      onClick={()=>activeMenuItem(index)}
-                                                      sx={{my: 2, color: 'white', display: 'block'}}
+                                    onClick={() => activeMenuItem(index)}
+                                    sx={{my: 2, color: 'white', display: 'block'}}
 
-                                                  >
-                                                      {name}
-                                                  </Button></Link>
-                                              </MenuItem>
+                                >
+                                    {name}
+                                </Button></Link>
+                            </MenuItem>
 
                         ))}
                     </Box>
