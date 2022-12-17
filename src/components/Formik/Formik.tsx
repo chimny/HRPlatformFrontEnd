@@ -12,6 +12,7 @@ import {SeverityStatus} from "./interface/severityStatusInterface";
 import { formValues } from './interface/formValues';
 
 import './FormikField.css'
+import {activeHost} from "../../activeHost";
 
 
 export const Formik = () => {
@@ -49,7 +50,7 @@ export const Formik = () => {
             setLoading(true);
 
             try {
-               await fetch(`http://localhost:3001/addPerson`, {
+               await fetch(`${activeHost}/addPerson`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

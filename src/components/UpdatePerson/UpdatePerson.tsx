@@ -6,6 +6,7 @@ import {useParams} from "react-router";
 import {FormikUpdate} from "./FormikUpdate";
 import {formValues} from "../Formik/interface/formValues";
 import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
+import {activeHost} from "../../activeHost";
 
 export const UpdatePerson = () => {
 
@@ -19,7 +20,7 @@ export const UpdatePerson = () => {
     const fetchData = async () => {
 
         try {
-            const data = await fetch(`http://localhost:3001/personList/chosenPerson/${personID}`);
+            const data = await fetch(`${activeHost}/personList/chosenPerson/${personID}`);
             const json = await data.json();
             const {chosenPersonData} = json;
             setLoading(false);

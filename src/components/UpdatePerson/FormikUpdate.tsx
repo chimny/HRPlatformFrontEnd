@@ -5,6 +5,7 @@ import {positionObj} from "../Formik/positionList";
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {validationSchema} from "../Formik/validationSchema";
+import {activeHost} from "../../activeHost";
 
 
 interface Props {
@@ -26,7 +27,7 @@ export const FormikUpdate = (props: Props) => {
 
 
             try {
-                await fetch(`http://localhost:3001/personList/updatePerson/${personID}/${name}/${surname}/${position}/${salary}`, {
+                await fetch(`${activeHost}/personList/updatePerson/${personID}/${name}/${surname}/${position}/${salary}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',

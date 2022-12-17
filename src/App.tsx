@@ -5,7 +5,7 @@ import {
     Route,
 } from "react-router-dom";
 import { Home } from './components/Home/Home';
-import { PositionList } from './components/Position/PositionList';
+import { PositionList } from './components/PositionList/PositionList';
 import { SalaryData } from './components/Salary/SalaryData';
 import {Navigation} from "./components/Navigation/Navigation";
 import {PersonList} from "./components/PersonList/PersonList";

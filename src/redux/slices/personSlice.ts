@@ -1,11 +1,17 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
+import { activeHost } from "../../activeHost";
 import {UsersState} from "../store/storeType";
+
+
+
+
+
 
 
 export const getPeopleList = createAsyncThunk(
     'personList/getPeopleList',
     async () => {
-        const res = await fetch(`http://localhost:3001/personList`);
+        const res = await fetch(`${activeHost}/personList`);
         return await res.json()
     }
 )
@@ -13,7 +19,7 @@ export const getPeopleList = createAsyncThunk(
 export const removePerson = createAsyncThunk(
     'personList/removePerson',
     async (id: string) => {
-        await fetch(`http://localhost:3001/personList/deletePerson/${id}`, {method: 'DELETE'});
+        await fetch(`${activeHost}/personList/deletePerson/${id}`, {method: 'DELETE'});
     }
 )
 

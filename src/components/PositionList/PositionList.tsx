@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
+import {activeHost} from "../../activeHost";
 
 
 
@@ -23,7 +24,7 @@ export const PositionList = ()=>{
 
     const receiveHandler = async ()=>{
         try{
-        const jsonData =  await fetch('http://localhost:3001/positions');
+        const jsonData =  await fetch(`${activeHost}/positions`);
         const data = await jsonData.json()
             console.log(data);
          setPositionList(data)}
