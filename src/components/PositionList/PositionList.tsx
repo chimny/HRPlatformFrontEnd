@@ -10,7 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
-import {activeHost} from "../../activeHost";
+import {activeHost} from "../../Utils/activeHost";
 
 
 

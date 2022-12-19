@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {Link} from "react-router-dom";
 import GroupsIcon from '@mui/icons-material/Groups';
-
 import './navStyle.css';
 
 
@@ -60,7 +59,6 @@ export const Navigation = () => {
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
-        //    selected logic here
     };
 
     const handleCloseUserMenu = () => {
@@ -69,16 +67,12 @@ export const Navigation = () => {
 
 
     const activeMenuItem = (passedIndex: number) => {
-
-        //@todo implement logic of updating state below
         setNav(prev => {
 
             return prev.map((el, index) => index === passedIndex ? {...el, activeStatus: true} : {
                 ...el,
                 activeStatus: false
             })
-
-
         })
         handleCloseNavMenu()
 
@@ -210,3 +204,4 @@ export const Navigation = () => {
     );
 };
 
+//@todo production cuts down base url

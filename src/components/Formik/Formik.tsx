@@ -12,7 +12,7 @@ import {SeverityStatus} from "./interface/severityStatusInterface";
 import { formValues } from './interface/formValues';
 
 import './FormikField.css'
-import {activeHost} from "../../activeHost";
+import {activeHost} from "../../Utils/activeHost";
 
 
 export const Formik = () => {

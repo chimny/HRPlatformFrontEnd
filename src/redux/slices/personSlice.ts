@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit"
-import { activeHost } from "../../activeHost";
+import { activeHost } from "../../Utils/activeHost";
 import {UsersState} from "../store/storeType";
 
 

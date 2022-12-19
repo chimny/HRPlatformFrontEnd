@@ -6,7 +6,7 @@ import {useParams} from "react-router";
 import {FormikUpdate} from "./FormikUpdate";
 import {formValues} from "../Formik/interface/formValues";
 import { ErrorComponent } from "../ErrorComponent/ErrorComponent";
-import {activeHost} from "../../activeHost";
+import {activeHost} from "../../Utils/activeHost";
 
 export const UpdatePerson = () => {
 

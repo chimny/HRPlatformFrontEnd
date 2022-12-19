@@ -5,7 +5,7 @@ import {positionObj} from "../Formik/positionList";
 import {Link, useNavigate} from "react-router-dom";
 import React from "react";
 import {validationSchema} from "../Formik/validationSchema";
-import {activeHost} from "../../activeHost";
+import {activeHost} from "../../Utils/activeHost";
 
 
 interface Props {
