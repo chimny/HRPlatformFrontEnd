@@ -16,11 +16,11 @@ import { SuccessComponent } from './components/SuccesComponent/SuccesComponent';
 
 function App() {
   return (
-      <BrowserRouter>
+      <BrowserRouter basename="/HRPlatformFrontEnd">
           <Navigation/>
           <Routes>
               <Route path='/' element={<Home/>}/>
-              <Route path='/HRPlatformFrontEnd/' element={<Home/>}/>
+              {/*<Route path='/HRPlatformFrontEnd/' element={<Home/>}/>*/}
               <Route path='/personList' element={<PersonList/>}/>
               <Route path='/personList/chosenPerson/:personID' element={<UpdatePerson/>}/>
               <Route path='/addPerson' element={<AddPerson/>}/>
