@@ -8,6 +8,7 @@ import {validationSchema} from "../Formik/validationSchema";
 import {activeHost} from "../../Utils/activeHost";
 
 
+
 interface Props {
     initValues: any;
     personID: string;
@@ -41,14 +42,8 @@ export const FormikUpdate = (props: Props) => {
 
             } catch (e) {
                 console.error(`unexpected error occurred: ${e} `)
-            } finally {
-
-                console.log('done')
-
-
+                navigate(`/error`)
             }
-
-
         },
     });
 

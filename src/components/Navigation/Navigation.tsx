@@ -165,7 +165,7 @@ export const Navigation = () => {
                         {nav.map(({
                                       name, path, activeStatus
                                   }, index) => (
-                            <MenuItem>
+                            <MenuItem key={name}>
                                 <Link to={path} key={name} className={activeStatus ? 'activeOption' : ''}> <Button
 
                                     onClick={() => activeMenuItem(index)}

@@ -40,6 +40,7 @@ export const PersonList = () => {
     const deleteHandler = useCallback((id: string) => {
         handleClickOpen();
         setPersonId(id);
+        dispatch(getPeopleList());
     }, [dispatch]);
 
     const deletePersonHandler = () => {
