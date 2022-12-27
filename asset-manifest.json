@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/HRPlatformFrontEnd/static/css/main.f9a5aa3d.css",
-    "main.js": "/HRPlatformFrontEnd/static/js/main.22e123de.js",
+    "main.js": "/HRPlatformFrontEnd/static/js/main.fdc4ed81.js",
     "static/js/787.bd0ab664.chunk.js": "/HRPlatformFrontEnd/static/js/787.bd0ab664.chunk.js",
     "index.html": "/HRPlatformFrontEnd/index.html",
     "main.f9a5aa3d.css.map": "/HRPlatformFrontEnd/static/css/main.f9a5aa3d.css.map",
-    "main.22e123de.js.map": "/HRPlatformFrontEnd/static/js/main.22e123de.js.map",
+    "main.fdc4ed81.js.map": "/HRPlatformFrontEnd/static/js/main.fdc4ed81.js.map",
     "787.bd0ab664.chunk.js.map": "/HRPlatformFrontEnd/static/js/787.bd0ab664.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f9a5aa3d.css",
-    "static/js/main.22e123de.js"
+    "static/js/main.fdc4ed81.js"
   ]
 }
