@@ -37,15 +37,18 @@ export const PersonList = () => {
     };
 
 
+    //function triggered after clicking delete button in person list view
     const deleteHandler = useCallback((id: string) => {
         handleClickOpen();
         setPersonId(id);
-        dispatch(getPeopleList());
     }, [dispatch]);
 
+
+    //function to delete user in confirmation view after clicking delete button
     const deletePersonHandler = () => {
         dispatch(removePerson(personId));
         dispatch(removePersonFromState(personId));
+        dispatch(getPeopleList());
         dispatch(getPeopleList());
         handleClose()
     }

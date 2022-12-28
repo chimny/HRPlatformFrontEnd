@@ -3,11 +3,6 @@ import { activeHost } from "../../Utils/activeHost";
 import {UsersState} from "../store/storeType";
 
 
-
-
-
-
-
 export const getPeopleList = createAsyncThunk(
     'personList/getPeopleList',
     async () => {

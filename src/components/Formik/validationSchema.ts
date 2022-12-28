@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 
-const regexpString = /^[a-zA-ZäöüßÄÖÜąĄćĆżŻŁłźŹ]+$/;
+const regexpString = /^[a-zA-ZäöüßÄÖÜąĄćĆżŻŁłźŹŚś]+$/;
 
 export const validationSchema = yup.object({
     name: yup

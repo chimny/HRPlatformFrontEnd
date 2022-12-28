@@ -5,7 +5,7 @@ import {PositionDescriptionEntity} from '../../../../backend/types/positionDescr
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
+import TableContainer, {TableContainerProps} from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
@@ -18,28 +18,32 @@ import {activeHost} from "../../Utils/activeHost";
 
 
 
-export const PositionList = ()=>{
+export const PositionList : React.FC<TableContainerProps> = ()=>{
 
     const [positionList,setPositionList] = useState<null | PositionDescriptionEntity[] | 'error' >(null);
 
-    const receiveHandler = async ()=>{
-        try{
-        const jsonData =  await fetch(`${activeHost}/positions`);
-        const data = await jsonData.json()
-            console.log(data);
-         setPositionList(data)}
 
-        catch(e){
-            console.error(`unexpected error occured: ${e}`)
-            setPositionList('error');
-        }
-
-    }
 
 
 
     useEffect(()=>{
+        const receiveHandler = async ()=>{
+            try{
+                const jsonData =  await fetch(`${activeHost}/positions`);
+                const data = await jsonData.json()
+                console.log(data);
+                setPositionList(data)}
+
+            catch(e){
+                console.error(`unexpected error occurred: ${e}`)
+                setPositionList('error');
+            }
+
+        }
+
+
         receiveHandler()
+            .catch(console.error)
     },[])
 
 

@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
 import {Field, ErrorMessage, FieldInputProps} from "formik";
-import {FormControl, FormHelperText, InputLabel, MenuItem, OutlinedInput, Select} from "@mui/material";
+import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
 
 import './FormikField.css'
 
@@ -33,7 +33,6 @@ const MaterialUISelectField: React.FC<MaterialUISelectFieldProps> = ({
                                                                          name,
                                                                          onChange,
                                                                          onBlur,
-                                                                         required,
                                                                          error
                                                                      }) => {
 
