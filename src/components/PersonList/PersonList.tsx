@@ -41,7 +41,7 @@ export const PersonList = () => {
     const deleteHandler = useCallback((id: string) => {
         handleClickOpen();
         setPersonId(id);
-    }, [dispatch]);
+    }, []);
 
 
     //function to delete user in confirmation view after clicking delete button
