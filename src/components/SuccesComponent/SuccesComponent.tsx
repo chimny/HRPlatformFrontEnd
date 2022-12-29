@@ -1,5 +1,5 @@
 import {Button, Typography} from "@mui/material"
-import {StyledCenteredDiv} from "../../Utils/Components/StyledCenteredDiv";
+import {StyledCenteredDiv} from "../../Utils/StyledCenteredDiv";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {Link} from "react-router-dom";
 import React from "react";

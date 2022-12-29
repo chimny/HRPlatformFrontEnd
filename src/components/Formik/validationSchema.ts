@@ -3,7 +3,7 @@ import * as yup from "yup";
 
 const regexpString = /^[a-zA-ZäöüßÄÖÜąĄćĆżŻŁłźŹŚś]+$/;
 
-export const validationSchema = yup.object({
+export const validationSchema  = yup.object({
     name: yup
         .string()
         .min(3, 'Name should include at least 3 signs!')

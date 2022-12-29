@@ -1,12 +1,8 @@
 import * as React from 'react';
-import styled from '@mui/system/styled';
 import Typography from '@mui/material/Typography';
-import GroupsIcon from '@mui/icons-material/Groups';
-import {StyledCenteredDiv} from "../../Utils/Components/StyledCenteredDiv";
-import {StyledHome, StyledHomeChild} from "./StyledHome";
 import {StyledButtonWrapper} from "../SuccesComponent/StyledButtonWrapper";
 import {Link} from "react-router-dom";
-import { Button, Container, Snackbar} from '@mui/material';
+import { Button, Container} from '@mui/material';
 
 
 
@@ -28,7 +24,6 @@ export const Home = () => {
                     proper access can reach it!
                     Looking forward to check it?
                     Don't hesitate, try it now!
-                    {/*    @todo add redirect to person list button, plus add new employess*/}
                 </Typography>
                 <StyledButtonWrapper>
 

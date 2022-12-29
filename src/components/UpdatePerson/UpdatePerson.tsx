@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback,useEffect, useState} from "react";
 
 import {Spinner} from "../Spinner/Spinner";
-import {Alert, Button, Container, Snackbar, TextField} from "@mui/material";
+import {Container} from "@mui/material";
 import {useParams} from "react-router";
 import {FormikUpdate} from "./FormikUpdate";
 import {formValues} from "../Formik/interface/formValues";
@@ -11,13 +11,12 @@ import {activeHost} from "../../Utils/activeHost";
 export const UpdatePerson = () => {
 
     const {personID} = useParams();
-
-
     const [loading, setLoading] = useState<boolean>(true);
     const [initValues, setInitValues] = useState<formValues>({name: '', surname: '', salary: '', position: ''})
 
 
-    const fetchData = async () => {
+
+    const fetchData = useCallback(async () => {
 
         try {
             const data = await fetch(`${activeHost}/personList/chosenPerson/${personID}`);
@@ -35,13 +34,14 @@ export const UpdatePerson = () => {
             console.log(e)
             return (<ErrorComponent/>)
         }
-    }
+    },[personID])
+
 
 
     useEffect(() => {
             fetchData()
                 .catch(console.error);
-        }, []
+        }, [fetchData]
     )
 
 
@@ -53,10 +53,7 @@ export const UpdatePerson = () => {
     return (
         <Container
             maxWidth="sm" sx={{padding: '20px'}}>
-
             <FormikUpdate initValues={initValues} personID={String(personID)}/>
-
-
         </ Container>
     );
 

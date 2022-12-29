@@ -2,13 +2,13 @@
 .menuLink {
     color: black;
     text-decoration: none;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transition: 0.1s;
     padding: 2px;
 }
 
 
-a{
+a {
     text-decoration: none;
 }
 
@@ -16,7 +16,6 @@ a{
     border-bottom: white solid 1px;
     background: #2196f3;
 }
-
 
 
 .menuLinkMobile {

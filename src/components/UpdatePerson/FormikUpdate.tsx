@@ -36,7 +36,6 @@ export const FormikUpdate = (props: Props) => {
                     body: JSON.stringify(values),
                 });
 
-                //@todo update section to pass person ID in success component
                 navigate(`/success/${personID}`)
 
 
@@ -61,7 +60,6 @@ export const FormikUpdate = (props: Props) => {
                     value={formik.values.name}
                     onChange={formik.handleChange}
                     error={formik.touched.name && Boolean(formik.errors.name)}
-                    // helperText={formik.touched.name && formik.errors.name}
                 /></div>
 
 
@@ -75,7 +73,6 @@ export const FormikUpdate = (props: Props) => {
                         value={formik.values.surname}
                         onChange={formik.handleChange}
                         error={formik.touched.surname && Boolean(formik.errors.surname)}
-                        // helperText={formik.touched.surname && formik.errors.surname}
                     />
                 </div>
 
@@ -90,7 +87,6 @@ export const FormikUpdate = (props: Props) => {
                         value={formik.values.salary}
                         onChange={formik.handleChange}
                         error={formik.touched.salary && Boolean(formik.errors.salary)}
-                        // helperText={formik.touched.salary && formik.errors.salary}
                     /></div>
 
                 <FormikSelect name={'position'} label={'position'} items={positionObj}

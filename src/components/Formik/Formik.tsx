@@ -2,20 +2,20 @@ import React, {useState} from 'react';
 
 import {useFormik, FormikProvider} from 'formik';
 import {FormikSelect} from './FormikSelect';
-import { validationSchema } from './validationSchema';
+import {validationSchema} from './validationSchema';
 
 import {TextField, Button, Alert, Container, Snackbar} from '@mui/material';
 
 import {Spinner} from "../Spinner/Spinner";
 import {positionObj} from "./positionList";
 import {SeverityStatus} from "./interface/severityStatusInterface";
-import { formValues } from './interface/formValues';
+import {formValues} from './interface/formValues';
 
 import './FormikField.css'
 import {activeHost} from "../../Utils/activeHost";
 
 
-export const Formik = () => {
+export const Formik: React.FC = () => {
 
     const [open, setOpen] = useState<boolean>(false);
     const [severityStatus, setSeverityStatus] = useState<SeverityStatus>({
@@ -25,7 +25,7 @@ export const Formik = () => {
     const [loading, setLoading] = useState<boolean>(false);
 
 
-    const handleClick  = ():void => {
+    const handleClick = (): void => {
         setOpen(true);
     };
 
@@ -46,11 +46,11 @@ export const Formik = () => {
     const formik = useFormik({
         initialValues,
         validationSchema,
-        onSubmit: async (values):Promise<void> => {
+        onSubmit: async (values): Promise<void> => {
             setLoading(true);
 
             try {
-               await fetch(`${activeHost}/addPerson`, {
+                await fetch(`${activeHost}/addPerson`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -133,7 +133,8 @@ export const Formik = () => {
                                   error={Boolean(formik.touched.position && Boolean(formik.errors.position))}/>
 
 
-                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit" disabled={!Boolean(formik.dirty)}>
+                    <div className='StyledButton'><Button color="primary" variant="contained" type="submit"
+                                                          disabled={!Boolean(formik.dirty)}>
                         Submit
                     </Button></div>
 

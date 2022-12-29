@@ -40,11 +40,6 @@ const pagesUpdate: pageNavigation[] = [{
         path: '/position-list',
         activeStatus: false
     },
-    {
-        name: 'Salary data',
-        path: '/salary-data',
-        activeStatus: false
-    }
 ]
 
 export const Navigation = () => {
@@ -203,5 +198,3 @@ export const Navigation = () => {
         </AppBar>
     );
 };
-
-//@todo production cuts down base url
