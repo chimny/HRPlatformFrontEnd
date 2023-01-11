@@ -1,8 +1,8 @@
-import { NewPersonPosition } from "../../../../backend/types/newPesonPosition";
+import {PersonPositionDataInterface} from '../../../../backend/types/personPositionData';
 
 
 export interface  UsersState {
-        receivedData: { personPositionData: NewPersonPosition[] } | { personPositionData: [] },
+        receivedData: { personPositionData: PersonPositionDataInterface[] } | { personPositionData: [] },
         status: null | 'pending' | 'succeeded' | 'failed'
 }
 

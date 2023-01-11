@@ -49,6 +49,9 @@ export const Formik: React.FC = () => {
         onSubmit: async (values): Promise<void> => {
             setLoading(true);
 
+            const {name, surname} = values;
+            name.trim();
+            surname.trim();
             try {
                 await fetch(`${activeHost}/addPerson`, {
                     method: 'POST',
