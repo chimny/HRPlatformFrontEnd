@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell,{tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -15,7 +15,34 @@ import {Spinner} from "../Spinner/Spinner";
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {PersonActions} from "./PersonActions";
 import Dialog from '@mui/material/Dialog';
-import {Button, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Button, DialogActions, DialogContent, DialogContentText, DialogTitle, styled} from "@mui/material";
+
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
+
+
+
+
+
 
 
 export const PersonList = () => {
@@ -97,32 +124,32 @@ export const PersonList = () => {
 
             <TableContainer component={Paper}>
                 <Table sx={{minWidth: 650}} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell align="right">Surname</TableCell>
-                            <TableCell align="right">Position</TableCell>
-                            <TableCell align="right">Salary</TableCell>
-                            <TableCell align="right">Actions</TableCell>
+                    <TableHead >
+                        <TableRow sx={{color:'red'}}>
+                            <StyledTableCell>Name</StyledTableCell>
+                            <StyledTableCell align="right">Surname</StyledTableCell>
+                            <StyledTableCell align="right">Position</StyledTableCell>
+                            <StyledTableCell align="right">Salary</StyledTableCell>
+                            <StyledTableCell align="right">Actions</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {listedPersons.map((person) => (
-                            <TableRow
+                            <StyledTableRow
                                 key={person.personId}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row">
+                                <StyledTableCell component="th" scope="row">
                                     {person.name}
-                                </TableCell>
-                                <TableCell align="right">{person.surName}</TableCell>
-                                <TableCell align="right">{person.position}</TableCell>
-                                <TableCell align="right">{person.salary}</TableCell>
-                                <TableCell align="right">
+                                </StyledTableCell>
+                                <StyledTableCell align="right">{person.surName}</StyledTableCell>
+                                <StyledTableCell align="right">{person.position}</StyledTableCell>
+                                <StyledTableCell align="right">{person.salary}</StyledTableCell>
+                                <StyledTableCell align="right">
                                     <PersonActions personId={person.personId}
                                                    onDelete={() => deleteHandler(person.personId as string)}/>
-                                </TableCell>
-                            </TableRow>
+                                </StyledTableCell>
+                            </StyledTableRow>
                         ))}
                     </TableBody>
                 </Table>
