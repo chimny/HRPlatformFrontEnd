@@ -1,5 +1,5 @@
 import {Typography} from "@mui/material"
-import {StyledCenteredDiv} from "../../Utils/StyledCenteredDiv";
+import {StyledCenteredDiv} from "../../Utils/styles/StyledCenteredDiv";
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import React from "react";
 

@@ -11,7 +11,7 @@ import {positionObj} from "./positionList";
 import {SeverityStatus} from "./interface/severityStatusInterface";
 import {formValues} from './interface/formValues';
 
-import './FormikField.css'
+import './styles/FormikField.css'
 import {activeHost} from "../../Utils/activeHost";
 
 

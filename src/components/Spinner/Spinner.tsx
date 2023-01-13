@@ -1,5 +1,5 @@
 import {CircularProgress} from "@mui/material";
-import { StyledCenteredDiv } from "../../Utils/StyledCenteredDiv";
+import { StyledCenteredDiv } from "../../Utils/styles/StyledCenteredDiv";
 import React from "react";
 
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import {StyledButtonWrapper} from "../SuccesComponent/StyledButtonWrapper";
+import {StyledButtonWrapper} from "../SuccesComponent/styles/StyledButtonWrapper";
 import {Link} from "react-router-dom";
 import { Button, Container} from '@mui/material';
 

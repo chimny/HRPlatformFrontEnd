@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import {Field, ErrorMessage, FieldInputProps} from "formik";
 import {FormControl, FormHelperText, InputLabel, MenuItem, Select} from "@mui/material";
 
-import './FormikField.css'
+import './styles/FormikField.css'
 
 export interface FormikSelectItem {
     label: string;

@@ -11,7 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import {Link} from "react-router-dom";
 import GroupsIcon from '@mui/icons-material/Groups';
-import './navStyle.css';
+import './styles/navStyle.css';
 
 
 interface pageNavigation {

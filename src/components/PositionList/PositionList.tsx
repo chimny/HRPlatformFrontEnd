@@ -11,10 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {ErrorComponent} from "../ErrorComponent/ErrorComponent";
 import {activeHost} from "../../Utils/activeHost";
-
-
-
-
+import {StyledTableCell, StyledTableRow} from "../../Utils/styles/StyledTable";
 
 
 
@@ -61,20 +58,20 @@ export const PositionList : React.FC<TableContainerProps> = ()=>{
             <Table sx={{minWidth: 650}} >
                 <TableHead >
                     <TableRow>
-                         <TableCell align="center" sx={{borderBottom: 1,fontSize:32}}> Position</TableCell>
-                        <TableCell align="center" sx={{borderBottom: 1,fontSize:32}}>Description</TableCell>
+                         <StyledTableCell align="center" sx={{fontSize:32}}> Position</StyledTableCell>
+                        <StyledTableCell align="center" sx={{fontSize:32}}>Description</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {positionList.map((position) => (
-                        <TableRow
+                        <StyledTableRow
                             key={position.position}
                         >
-                            <TableCell component="th" scope="row" align="center"  sx={{borderRight: 1,width:1/2,}}>
+                            <TableCell component="th" scope="row" align="center"  sx={{width:1/2,}}>
                                 {position.position}
                             </TableCell>
                             <TableCell align="center">{position.description}</TableCell>
-                        </TableRow>
+                        </StyledTableRow>
                     ))}
                 </TableBody>
             </Table>
