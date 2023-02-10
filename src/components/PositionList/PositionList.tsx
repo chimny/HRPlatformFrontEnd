@@ -54,7 +54,8 @@ export const PositionList : React.FC<TableContainerProps> = ()=>{
 
 
     return (
-        <TableContainer component={Paper} sx={{ margin: '16px auto',minWidth: 650 }}>
+
+        <TableContainer component={Paper} sx={{ margin: '16px auto' }}>
             <Table sx={{minWidth: 650}} >
                 <TableHead >
                     <TableRow>

@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
-
 import {useFormik, FormikProvider} from 'formik';
 import {FormikSelect} from './FormikSelect';
-import {validationSchema} from './validationSchema';
-
-import {TextField, Button, Alert, Container, Snackbar} from '@mui/material';
+import {validationSchema} from './data/validationSchema';
+import {TextField, Button,  Container} from '@mui/material';
 
 import {Spinner} from "../Spinner/Spinner";
-import {positionObj} from "./positionList";
+import {positionObj} from "./data/positionList";
 import {SeverityStatus} from "./interface/severityStatusInterface";
 import {formValues} from './interface/formValues';
 
 import './styles/FormikField.css'
 import {activeHost} from "../../Utils/activeHost";
+import {SnackbarComponent} from "./SnackbarComponent";
 
 
 export const Formik: React.FC = () => {
@@ -144,13 +143,9 @@ export const Formik: React.FC = () => {
                 </form>
             </FormikProvider>
 
-            <Snackbar open={open} autoHideDuration={8000} onClose={handleClose}>
 
-                <Alert onClose={handleClose} severity={severityStatus.status} sx={{width: '100%'}}>
-                    {severityStatus.message}
-                </Alert>
+            <SnackbarComponent open={open} handleClose={handleClose} severityStatus={severityStatus}/>
 
-            </Snackbar>
 
         </ Container>
     );

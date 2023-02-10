@@ -127,7 +127,6 @@ export const Navigation = () => {
                         >
                             {nav.map(({name, path, activeStatus}, index) => (
                                 <MenuItem key={name}
-                                          onClick={() => activeMenuItem(index)}
                                           selected={activeStatus}
                                 >
                                     <Link to={path} className={'menuLinkMobile'}

@@ -1,4 +1,4 @@
-import {PositionList} from "../../../../backend/types/personPosition";
+import {PositionList} from "../../../../../backend/types/personPosition";
 
 interface positionObj{
     label: PositionList,
