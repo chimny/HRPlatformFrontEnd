@@ -9,7 +9,7 @@ export interface FormikSelectItem {
     value: string;
 }
 
-interface FormikSelectProps {
+export interface FormikSelectProps {
     name: string;
     label: string;
     items: FormikSelectItem[];
