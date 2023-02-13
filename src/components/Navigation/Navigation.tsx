@@ -63,8 +63,8 @@ export const Navigation = () => {
 
     const activeMenuItem = (passedIndex: number) => {
         setNav(prev => {
-
-            return prev.map((el, index) => index === passedIndex ? {...el, activeStatus: true} : {
+            // removed for now highlighting the active item
+            return prev.map((el, index) => index === passedIndex ? {...el, activeStatus: false} : {
                 ...el,
                 activeStatus: false
             })

@@ -3,6 +3,7 @@ import {
     BrowserRouter,
     Routes,
     Route,
+    HashRouter,
 } from "react-router-dom";
 import { Home } from './components/Home/Home';
 import { PositionList } from './components/PositionList/PositionList';
@@ -16,7 +17,7 @@ import {ErrorComponent} from "./components/ErrorComponent/ErrorComponent";
 
 function App() {
   return (
-      <BrowserRouter basename="/HRPlatformFrontEnd">
+      <HashRouter basename="/HRPlatformFrontEnd">
           <Navigation/>
           <Routes>
               <Route path='/' element={<Home/>}/>
@@ -27,7 +28,7 @@ function App() {
               <Route path='/success/:personID' element={<SuccessComponent/>}/>
               <Route path='/error' element={<ErrorComponent/>}/>
           </Routes>
-      </BrowserRouter>
+      </HashRouter>
   );
 }
 
