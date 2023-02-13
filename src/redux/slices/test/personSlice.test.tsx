@@ -1,10 +1,11 @@
-import { UsersState } from "../../store/storeType";
+import { PersonPositionDataInterface } from "../../../../../backend/types/personPositionData";
+import { UsersState} from "../../store/storeType";
 import { getPeopleList, personSlice} from "../personSlice";
 
-//@todo write tests according to proper fetch data
 
-const mockData = {
-    personPositionData: [{personId: '1', name: 'John'}]
+
+const mockData: { personPositionData: PersonPositionDataInterface[] } | { personPositionData: [] } = {
+    personPositionData: [{personId: '1', name: 'John',surName:'Doe',salary:2222,position:'Assistant'}]
 };
 
 const initialState: UsersState = {
