@@ -3,6 +3,12 @@ This is the front-end of the HR Platform app. It is built with React and Redux.
 
 Please find working [live demo here](https://chimny.github.io/HRPlatformFrontEnd/)
 
+This is the front-end portion of the HR Platform application, which provides a full-stack solution for managing employee data. This is the first full stack project of the author, which includes all CRUD features (adding, modifying, and deleting employees). The app uses Material UI styling components for a clean and modern user interface.
+
+The app is built using React and Redux for state management, with additional dependencies such as Formik and Yup for form validation, React Router for navigation, and API requests. The app is also integrated with GitHub Pages for easy deployment.
+
+For more information on installation and usage, please refer to the sections below.
+
 ## Installation
 1. Clone the repository to your local machine.
 2. Run npm install to install the dependencies.
