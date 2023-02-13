@@ -1,6 +1,8 @@
 # HR Platform Front-end
 This is the front-end of the HR Platform app. It is built with React and Redux.
 
+Please find working [live demo here](https://chimny.github.io/HRPlatformFrontEnd/)
+
 ## Installation
 1. Clone the repository to your local machine.
 2. Run npm install to install the dependencies.
